@@ -4,6 +4,7 @@ import StyledForm from "./Form.styled";
 
 import Button from "../Button";
 import Input from "../Input";
+import Dropdown from "../Dropdown";
 
 const Form = () => {
   const [step, setStep] = useState(1);
@@ -19,12 +20,24 @@ const Form = () => {
   };
 
   const firstStep = () => {
+    const items = [
+      { title: "Klatka piersiowa:", name: "chest", add: "cm", type: "number" },
+      { title: "Lewy biceps:", name: "bicepsL", add: "cm", type: "number" },
+      { title: "Prawy biceps:", name: "bicepsR", add: "cm", type: "number" },
+      { title: "Brzuch:", name: "belly", add: "cm", type: "number" },
+      { title: "Biodra:", name: "hips", add: "cm", type: "number" },
+      { title: "Lewe udo:", name: "thighL", add: "cm", type: "number" },
+      { title: "Prawe udo:", name: "thighR", add: "cm", type: "number" },
+      { title: "Lewa łydka:", name: "calfL", add: "cm", type: "number" },
+      { title: "Prawa łydka:", name: "calfR", add: "cm", type: "number" },
+    ];
     return (
       <>
         <Input type="text" name="firstName" labelTitle="Imię:" />
         <Input type="text" name="lastName" labelTitle="Nazwisko:" />
         <Input type="number" name="height" labelTitle="Wzrost:" addendum="cm" />
         <Input type="number" name="weight" labelTitle="Waga:" addendum="kg" />
+        <Dropdown dropdownName="Pomiary ciała" items={items} type="number" />
       </>
     );
   };
