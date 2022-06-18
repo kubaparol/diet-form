@@ -9,6 +9,7 @@ const Input = (props) => {
     <Label fieldName={props.name}>
       {props.labelTitle}
       <StyledInput {...props}></StyledInput>
+      {props.addendum}
     </Label>
   );
 };
