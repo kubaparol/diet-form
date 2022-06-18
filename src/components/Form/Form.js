@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import StyledForm from "./Form.styled";
 
 import Button from "../Button";
-import Input from "../Input";
+import CustomInput from "../CustomInput";
 import Dropdown from "../Dropdown";
+import InputRadioList from "../InputRadioList";
 
 const Form = () => {
   const [step, setStep] = useState(1);
@@ -20,7 +21,7 @@ const Form = () => {
   };
 
   const firstStep = () => {
-    const items = [
+    const dropdownItems = [
       { title: "Klatka piersiowa:", name: "chest", add: "cm", type: "number" },
       { title: "Lewy biceps:", name: "bicepsL", add: "cm", type: "number" },
       { title: "Prawy biceps:", name: "bicepsR", add: "cm", type: "number" },
@@ -31,22 +32,43 @@ const Form = () => {
       { title: "Lewa łydka:", name: "calfL", add: "cm", type: "number" },
       { title: "Prawa łydka:", name: "calfR", add: "cm", type: "number" },
     ];
+    const inputRadioItems = [
+      { name: "loseWeight", labelTitle: "Chcę schudnąć" },
+      { name: "keepWeight", labelTitle: "Chcę utrzymać wagę" },
+      { name: "makeWeight", labelTitle: "Chcę przytyć" },
+    ];
     return (
       <>
-        <Input type="text" name="firstName" labelTitle="Imię:" />
-        <Input type="text" name="lastName" labelTitle="Nazwisko:" />
-        <Input type="number" name="height" labelTitle="Wzrost:" addendum="cm" />
-        <Input type="number" name="weight" labelTitle="Waga:" addendum="kg" />
-        <Dropdown dropdownName="Pomiary ciała" items={items} type="number" />
+        <CustomInput type="text" name="firstName" labelTitle="Imię:" />
+        <CustomInput type="text" name="lastName" labelTitle="Nazwisko:" />
+        <CustomInput
+          type="number"
+          name="height"
+          labelTitle="Wzrost:"
+          addendum="cm"
+        />
+        <CustomInput
+          type="number"
+          name="weight"
+          labelTitle="Waga:"
+          addendum="kg"
+        />
+        <Dropdown
+          dropdownName="Pomiary ciała"
+          items={dropdownItems}
+          type="number"
+        />
+        <InputRadioList title="Cel" items={inputRadioItems} />
+        <CustomInput type="file" />
       </>
     );
   };
   const secondStep = () => {
     return (
       <>
-        <Input type="text" name="name" labelTitle="2Imię:" />
-        <Input type="text" name="nazwisko" labelTitle="2Nazwisko:" />
-        <Input type="text" name="email" labelTitle="2E-mail:" />
+        <CustomInput type="text" name="name" labelTitle="2Imię:" />
+        <CustomInput type="text" name="nazwisko" labelTitle="2Nazwisko:" />
+        <CustomInput type="text" name="email" labelTitle="2E-mail:" />
       </>
     );
   };

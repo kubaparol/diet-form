@@ -1,17 +1,17 @@
 import React from "react";
 
-import StyledInput from "./Input.styled";
+import StyledCustomInput from "./CustomInput.styled";
 
 import Label from "../Label";
 
-const Input = (props) => {
+const CustomInput = (props) => {
   return (
     <Label fieldName={props.name}>
       {props.labelTitle}
-      <StyledInput {...props}></StyledInput>
+      <StyledCustomInput {...props}></StyledCustomInput>
       {props.addendum}
     </Label>
   );
 };
 
-export default Input;
+export default CustomInput;

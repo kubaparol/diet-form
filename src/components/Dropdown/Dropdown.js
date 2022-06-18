@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import StyledDropdown from "./Dropdown.styled";
 
-import Input from "../Input";
+import Input from "../CustomInput";
 import Button from "../Button";
 
 const Dropdown = (props) => {
