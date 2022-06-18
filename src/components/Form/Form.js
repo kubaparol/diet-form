@@ -17,7 +17,7 @@ const Form = () => {
 
   const nextStep = (e) => {
     e.preventDefault();
-    if (step < 2) setStep(step + 1);
+    if (step < 3) setStep(step + 1);
   };
 
   const firstStep = () => {
@@ -41,42 +41,58 @@ const Form = () => {
       <>
         <CustomInput type="text" name="firstName" labelTitle="Imię:" />
         <CustomInput type="text" name="lastName" labelTitle="Nazwisko:" />
-        <CustomInput
-          type="number"
-          name="height"
-          labelTitle="Wzrost:"
-          addendum="cm"
-        />
-        <CustomInput
-          type="number"
-          name="weight"
-          labelTitle="Waga:"
-          addendum="kg"
-        />
-        <Dropdown
-          dropdownName="Pomiary ciała"
-          items={dropdownItems}
-          type="number"
-        />
+        <CustomInput type="number" name="height" labelTitle="Wzrost:" addendum="cm" />
+        <CustomInput type="number" name="weight" labelTitle="Waga:" addendum="kg" />
+        <Dropdown dropdownName="Pomiary ciała" items={dropdownItems} type="number" />
         <InputRadioList title="Cel" items={inputRadioItems} />
         <CustomInput type="file" />
       </>
     );
   };
+
   const secondStep = () => {
+    const inputRadioWorkItems = [
+      { name: "physicalWork", labelTitle: "Praca fizyczna" },
+      { name: "intellectualWork", labelTitle: "Praca umysłowa" },
+    ];
+    const inputRadioActivityItems = [
+      { name: "lowActivity", labelTitle: "Niski" },
+      { name: "moderateActivity", labelTitle: "Umiarkowany" },
+      { name: "highActivity", labelTitle: "Wysoki" },
+    ];
+    const inputRadioDietHelpItems = [
+      { name: "dietHelp", labelTitle: "Tak" },
+      { name: "noDietHelp", labelTitle: "Nie" },
+    ];
+    const inputRadioDiseasesItems = [
+      { name: "diseases", labelTitle: "Tak" },
+      { name: "noDiseases", labelTitle: "Nie" },
+    ];
+    const inputRadioSuplementsItems = [
+      { name: "suplements", labelTitle: "Tak" },
+      { name: "noSuplements", labelTitle: "Nie" },
+    ];
+
     return (
       <>
-        <CustomInput type="text" name="name" labelTitle="2Imię:" />
-        <CustomInput type="text" name="nazwisko" labelTitle="2Nazwisko:" />
-        <CustomInput type="text" name="email" labelTitle="2E-mail:" />
+        <InputRadioList title="Jaki rodzaj pracy wykonujesz?" items={inputRadioWorkItems} />
+        <InputRadioList title="Jaki jest Twój poziom aktywności fizycznej?" items={inputRadioActivityItems} />
+        <InputRadioList title="Czy korzystałeś kiedyś z pomocy dietetyka?" items={inputRadioDietHelpItems} />
+        <InputRadioList title="Czy chorujesz na coś?" items={inputRadioDiseasesItems} />
+        <InputRadioList title="Czy stosujesz jakąś suplementację?" items={inputRadioSuplementsItems} />
       </>
     );
+  };
+
+  const thirdStep = () => {
+
   };
 
   return (
     <StyledForm>
       {step === 1 && firstStep()}
       {step === 2 && secondStep()}
+      {step === 3 && thirdStep()}
       <Button onClick={prevStep}>Wstecz</Button>
       <Button onClick={nextStep}>Dalej</Button>
     </StyledForm>
