@@ -13,7 +13,7 @@ import InputCheckboxList from "../InputCheckboxList";
 import { useChangeHandler } from "../../hooks";
 
 const Form = () => {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(3);
 
   // firstStep
   const { value: firstName, onChange: onChangeFirstName, clear: firstNameInputClear } = useChangeHandler();
@@ -39,14 +39,25 @@ const Form = () => {
   const { value: dietHelp, onChange: onChangeDietHelp, clear: dietHelpInputClear } = useChangeHandler();
   const { value: diseases, onChange: onChangeDiseases, clear: diseasesInputClear } = useChangeHandler();
   const { value: suplements, onChange: onChangeSuplements, clear: suplementsInputClear } = useChangeHandler();
+  const [snaksRange, setSnaksRange] = useState("Często");
+  const [waterRange, setWaterRange] = useState("Od 2 litrów do 3 litrów");
 
   // thirdStep
   const { value: meat, onChange: onChangeMeat, clear: meatInputClear } = useChangeHandler();
   const { value: dairy, onChange: onChangeDairy, clear: dairyInputClear } = useChangeHandler();
   const { value: drink, onChange: onChangeDrink, clear: drinkInputClear } = useChangeHandler();
+  const [likedProducts, setLikedProducts] = useState([]);
+  const [dislikedProducts, setDislikedProducts] = useState([]);
+  const [likedVegetables, setLikedVegetables] = useState([]);
+  const [dislikedVegetables, setDislikedVegetables] = useState([]);
+  const [likedFruits, setLikedFruits] = useState([]);
+  const [dislikedFruits, setDislikedFruits] = useState([]);
 
   //fourthStep
+  const [mealsRange, setMealsRange] = useState("Od 4 do 5");
+  const [moneyRange, setMoneyRange] = useState("Od 150 zł do 200 zł");
   const { value: meals, onChange: onChangeMeals, clear: mealsInputClear } = useChangeHandler();
+  const [mealsMustBe, setMealsMustBe] = useState([]);
 
   const prevStep = (e) => {
     e.preventDefault();
@@ -158,19 +169,33 @@ const Form = () => {
       { value: "juice", name: "dairy", labelTitle: "Soki" },
       { value: "carbonatedBeverage", name: "dairy", labelTitle: "Napoje gazowane" },
     ];
+    const snaksConditions = (e) => {
+      const value = e.target.value;
+      if (value < 25) setSnaksRange("Nigdy");
+      if (value > 25) setSnaksRange("Od czasu do czasu");
+      if (value > 50) setSnaksRange("Często");
+      if (value > 75) setSnaksRange("Bardzo często");
+    };
+    const waterConditions = (e) => {
+      const value = e.target.value;
+      if (value < 25) setWaterRange("Poniżej 1 litra");
+      if (value > 25) setWaterRange("Od 1 litra do 2 litrów");
+      if (value > 50) setWaterRange("Od 2 litrów do 3 litrów");
+      if (value > 75) setWaterRange("Powyżej 3 litrów");
+    };
     return (
       <>
         <InputRadioList title="Czy jesz mięso i ryby?" items={inputRadioMeatItems} onChange={onChangeMeat} value={meat} />
         <InputRadioList title="Czy jesz nabiał?" items={inputRadioDairyItems} onChange={onChangeDairy} value={dairy} />
-        <AddItem name="likedProducts" labelTitle="Jakie są Twoje ulubione produkty?" />
-        <AddItem name="dislikedProducts" labelTitle="Czego nie lubisz jeść?" />
-        <AddItem name="likedVegetables" labelTitle="Jakie warzywa lubisz?" />
-        <AddItem name="unlikedVegetables" labelTitle="Jakich warzyw nie lubisz?" />
-        <AddItem name="likedFruits" labelTitle="Jakie owoce lubisz?" />
-        <AddItem name="unlikedFruits" labelTitle="Jakich owoców nie lubisz?" />
-        <InputRange labelTitle="Jak często sięgasz po przekąski?" />
+        <AddItem name="likedProducts" labelTitle="Jakie są Twoje ulubione produkty?" getItems={setLikedProducts} />
+        <AddItem name="dislikedProducts" labelTitle="Czego nie lubisz jeść?" getItems={setDislikedProducts} />
+        <AddItem name="likedVegetables" labelTitle="Jakie warzywa lubisz?" getItems={setLikedVegetables} />
+        <AddItem name="dislikedVegetables" labelTitle="Jakich warzyw nie lubisz?" getItems={setDislikedVegetables} />
+        <AddItem name="likedFruits" labelTitle="Jakie owoce lubisz?" getItems={setLikedFruits} />
+        <AddItem name="dislikedFruits" labelTitle="Jakich owoców nie lubisz?" getItems={setDislikedFruits} />
+        <InputRange labelTitle="Jak często sięgasz po przekąski?" min={0} max={100} step={1} onChange={snaksConditions} text={snaksRange} />
         <InputRadioList title="Co zazwyczaj pijesz w ciągu dnia?" items={inputRadioDrinkItems} onChange={onChangeDrink} value={drink} />
-        <InputRange labelTitle="Ile pijesz wody w ciągu dnia?" />
+        <InputRange labelTitle="Ile pijesz wody w ciągu dnia?" min={0} max={100} step={1} onChange={waterConditions} text={waterRange} />
       </>
     );
   };
@@ -192,12 +217,28 @@ const Form = () => {
       { value: "microwave", name: "cookware", labelTitle: "Mikrofalówka" },
     ];
 
+    const mealsConditions = (e) => {
+      const value = e.target.value;
+      if (value < 20) setMealsRange("Od 2 do 3");
+      if (value > 20) setMealsRange("Od 3 do 4");
+      if (value > 40) setMealsRange("Od 4 do 5");
+      if (value > 60) setMealsRange("Od 5 do 6");
+      if (value > 80) setMealsRange("Powyżej 6");
+    };
+    const moneyConditions = (e) => {
+      const value = e.target.value;
+      if (value < 25) setMoneyRange("Do 150 zł");
+      if (value > 25) setMoneyRange("Od 150 zł do 200 zł");
+      if (value > 50) setMoneyRange("Od 200 zł do 300 zł");
+      if (value > 75) setMoneyRange("Powyżej 300 zł");
+    };
+
     return (
       <>
-        <InputRange labelTitle="Ile posiłków chcesz jeść w ciągu dnia?" />
+        <InputRange labelTitle="Ile posiłków chcesz jeść w ciągu dnia?" min={0} max={100} step={1} onChange={mealsConditions} text={mealsRange} />
         <InputRadioList title="Jakie powinny być twoje posiłki?" items={inputRadioMealsItems} onChange={onChangeMeals} value={meals} />
-        <AddItem name="mealsMustBe" labelTitle="Co musi się znaleźć w Twoim jadłospisie?" />
-        <InputRange labelTitle="Jaki budżet chcesz przeznaczyć na jedzenie?" />
+        <AddItem name="mealsMustBe" labelTitle="Co musi się znaleźć w Twoim jadłospisie?" getItems={setMealsMustBe} />
+        <InputRange labelTitle="Jaki budżet tygodniowo chcesz przeznaczać na jedzenie?" min={0} max={100} step={1} onChange={moneyConditions} text={moneyRange} />
         <InputCheckboxList title="Jakim sprzętem kuchennym dysponujesz?" items={inputCheckboxCookwareItems} />
       </>
     );

@@ -13,6 +13,7 @@ const AddItem = (props) => {
     e.preventDefault();
     setItems([...items, value]);
     setValue("");
+    props.getItems(items);
   };
 
   return (
