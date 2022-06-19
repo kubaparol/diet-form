@@ -8,6 +8,7 @@ import Dropdown from "../Dropdown";
 import InputRadioList from "../InputRadioList";
 import AddItem from "../AddItem";
 import InputRange from "../InputRange";
+import InputCheckboxList from "../InputCheckboxList";
 
 const Form = () => {
   const [step, setStep] = useState(1);
@@ -19,7 +20,7 @@ const Form = () => {
 
   const nextStep = (e) => {
     e.preventDefault();
-    if (step < 3) setStep(step + 1);
+    if (step < 4) setStep(step + 1);
   };
 
   const firstStep = () => {
@@ -114,7 +115,7 @@ const Form = () => {
         <AddItem name="unlikedFruits" labelTitle="Jakich owoców nie lubisz?" />
         <InputRange labelTitle="Jak często sięgasz po przekąski?" />
         <InputRadioList title="Co zazwyczaj pijesz w ciągu dnia?" items={inputRadioDrinkItems} />
-        <InputRange title="Ile pijesz wody w ciągu dnia?" />
+        <InputRange labelTitle="Ile pijesz wody w ciągu dnia?" />
       </>
     );
   };
@@ -126,12 +127,22 @@ const Form = () => {
       { value: "easy", name: "meals", labelTitle: "Łatwe w przygotowaniu" },
       { value: "cheap", name: "meals", labelTitle: "Cheap" },
     ];
+    const inputCheckboxCookwareItems = [
+      { value: "cooker", name: "cookware", labelTitle: "Kuchenka" },
+      { value: "kettle", name: "cookware", labelTitle: "Czajnik" },
+      { value: "freezer", name: "cookware", labelTitle: "Zamrażarka" },
+      { value: "toasker", name: "cookware", labelTitle: "Toster" },
+      { value: "mixer", name: "cookware", labelTitle: "Mikser" },
+      { value: "pressureCooker", name: "cookware", labelTitle: "Szybkowar" },
+      { value: "microwave", name: "cookware", labelTitle: "Mikrofalówka" },
+    ];
     return (
       <>
-        <InputRange title="Ile posiłków chcesz jeść w ciąfu dnia?" />
+        <InputRange labelTitle="Ile posiłków chcesz jeść w ciągu dnia?" />
         <InputRadioList title="Jakie powinny być twoje posiłki?" items={inputRadioMealsItems} />
         <AddItem name="mealsMustBe" labelTitle="Co musi się znaleźć w Twoim jadłospisie?" />
-        <InputRange title="Jaki budżet chcesz przeznaczyć na jedzenie?" />
+        <InputRange labelTitle="Jaki budżet chcesz przeznaczyć na jedzenie?" />
+        <InputCheckboxList title="Jakim sprzętem kuchennym dysponujesz?" items={inputCheckboxCookwareItems} />
       </>
     );
   };
@@ -141,6 +152,7 @@ const Form = () => {
       {step === 1 && firstStep()}
       {step === 2 && secondStep()}
       {step === 3 && thirdStep()}
+      {step === 4 && fourthStep()}
       <Button onClick={prevStep}>Wstecz</Button>
       <Button onClick={nextStep}>Dalej</Button>
     </StyledForm>
