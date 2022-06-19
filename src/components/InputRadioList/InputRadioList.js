@@ -6,10 +6,17 @@ import InputRadio from "../InputRadio";
 
 const InputRadioList = (props) => {
   return (
-    <StyledInputRadioList>
+    <StyledInputRadioList {...props}>
       {props.title}
       {props.items.map((item, index) => (
-        <InputRadio key={index} name={item.name} labelTitle={item.labelTitle} />
+        <InputRadio
+          key={index}
+          name={item.name}
+          labelTitle={item.labelTitle}
+          value={item.value}
+          onChange={props.onChange}
+          checked={props.value === item.value ? true : false}
+        />
       ))}
     </StyledInputRadioList>
   );
