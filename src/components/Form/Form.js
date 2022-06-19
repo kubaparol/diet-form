@@ -7,6 +7,7 @@ import CustomInput from "../CustomInput";
 import Dropdown from "../Dropdown";
 import InputRadioList from "../InputRadioList";
 import AddItem from "../AddItem";
+import InputRange from "../InputRange";
 
 const Form = () => {
   const [step, setStep] = useState(1);
@@ -96,6 +97,11 @@ const Form = () => {
       { value: "dairy", name: "dairy", labelTitle: "Tak" },
       { value: "noDairy", name: "dairy", labelTitle: "Nie" },
     ];
+    const inputRadioDrinkItems = [
+      { value: "dairy", name: "dairy", labelTitle: "Woda" },
+      { value: "juice", name: "dairy", labelTitle: "Soki" },
+      { value: "carbonatedBeverage", name: "dairy", labelTitle: "Napoje gazowane" },
+    ];
     return (
       <>
         <InputRadioList title="Czy jesz mięso i ryby?" items={inputRadioMeatItems} />
@@ -106,6 +112,26 @@ const Form = () => {
         <AddItem name="unlikedVegetables" labelTitle="Jakich warzyw nie lubisz?" />
         <AddItem name="likedFruits" labelTitle="Jakie owoce lubisz?" />
         <AddItem name="unlikedFruits" labelTitle="Jakich owoców nie lubisz?" />
+        <InputRange labelTitle="Jak często sięgasz po przekąski?" />
+        <InputRadioList title="Co zazwyczaj pijesz w ciągu dnia?" items={inputRadioDrinkItems} />
+        <InputRange title="Ile pijesz wody w ciągu dnia?" />
+      </>
+    );
+  };
+
+  const fourthStep = () => {
+    const inputRadioMealsItems = [
+      { value: "quick", name: "meals", labelTitle: "Szybkie" },
+      { value: "filling", name: "meals", labelTitle: "Sycące" },
+      { value: "easy", name: "meals", labelTitle: "Łatwe w przygotowaniu" },
+      { value: "cheap", name: "meals", labelTitle: "Cheap" },
+    ];
+    return (
+      <>
+        <InputRange title="Ile posiłków chcesz jeść w ciąfu dnia?" />
+        <InputRadioList title="Jakie powinny być twoje posiłki?" items={inputRadioMealsItems} />
+        <AddItem name="mealsMustBe" labelTitle="Co musi się znaleźć w Twoim jadłospisie?" />
+        <InputRange title="Jaki budżet chcesz przeznaczyć na jedzenie?" />
       </>
     );
   };
