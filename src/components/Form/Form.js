@@ -6,6 +6,7 @@ import Button from "../Button";
 import CustomInput from "../CustomInput";
 import Dropdown from "../Dropdown";
 import InputRadioList from "../InputRadioList";
+import AddItem from "../AddItem";
 
 const Form = () => {
   const [step, setStep] = useState(1);
@@ -33,9 +34,9 @@ const Form = () => {
       { title: "Prawa łydka:", name: "calfR", add: "cm", type: "number" },
     ];
     const inputRadioItems = [
-      { name: "loseWeight", labelTitle: "Chcę schudnąć" },
-      { name: "keepWeight", labelTitle: "Chcę utrzymać wagę" },
-      { name: "makeWeight", labelTitle: "Chcę przytyć" },
+      { value: "loseWeight", name: "weight", labelTitle: "Chcę schudnąć" },
+      { value: "keepWeight", name: "weight", labelTitle: "Chcę utrzymać wagę" },
+      { value: "makeWeight", name: "weight", labelTitle: "Chcę przytyć" },
     ];
     return (
       <>
@@ -52,25 +53,25 @@ const Form = () => {
 
   const secondStep = () => {
     const inputRadioWorkItems = [
-      { name: "physicalWork", labelTitle: "Praca fizyczna" },
-      { name: "intellectualWork", labelTitle: "Praca umysłowa" },
+      { value: "physicalWork", name: "work", labelTitle: "Praca fizyczna" },
+      { value: "intellectualWork", name: "work", labelTitle: "Praca umysłowa" },
     ];
     const inputRadioActivityItems = [
-      { name: "lowActivity", labelTitle: "Niski" },
-      { name: "moderateActivity", labelTitle: "Umiarkowany" },
-      { name: "highActivity", labelTitle: "Wysoki" },
+      { value: "lowActivity", name: "activity", labelTitle: "Niski" },
+      { value: "moderateActivity", name: "activity", labelTitle: "Umiarkowany" },
+      { value: "highActivity", name: "activity", labelTitle: "Wysoki" },
     ];
     const inputRadioDietHelpItems = [
-      { name: "dietHelp", labelTitle: "Tak" },
-      { name: "noDietHelp", labelTitle: "Nie" },
+      { value: "dietHelp", name: "dietHelp", labelTitle: "Tak" },
+      { value: "noDietHelp", name: "dietHelp", labelTitle: "Nie" },
     ];
     const inputRadioDiseasesItems = [
-      { name: "diseases", labelTitle: "Tak" },
-      { name: "noDiseases", labelTitle: "Nie" },
+      { value: "diseases", name: "diseases", labelTitle: "Tak" },
+      { value: "noDiseases", name: "diseases", labelTitle: "Nie" },
     ];
     const inputRadioSuplementsItems = [
-      { name: "suplements", labelTitle: "Tak" },
-      { name: "noSuplements", labelTitle: "Nie" },
+      { value: "suplements", name: "suplements", labelTitle: "Tak" },
+      { value: "noSuplements", name: "suplements", labelTitle: "Nie" },
     ];
 
     return (
@@ -85,7 +86,28 @@ const Form = () => {
   };
 
   const thirdStep = () => {
-
+    const inputRadioMeatItems = [
+      { value: "meatAndFish", name: "meat", labelTitle: "Tak" },
+      { value: "onlyMeat", name: "meat", labelTitle: "Tylko mięso" },
+      { value: "onlyFish", name: "meat", labelTitle: "Tylko ryby" },
+      { value: "noMeatAndFish", name: "meat", labelTitle: "Nie" },
+    ];
+    const inputRadioDairyItems = [
+      { value: "dairy", name: "dairy", labelTitle: "Tak" },
+      { value: "noDairy", name: "dairy", labelTitle: "Nie" },
+    ];
+    return (
+      <>
+        <InputRadioList title="Czy jesz mięso i ryby?" items={inputRadioMeatItems} />
+        <InputRadioList title="Czy jesz nabiał?" items={inputRadioDairyItems} />
+        <AddItem name="likedProducts" labelTitle="Jakie są Twoje ulubione produkty?" />
+        <AddItem name="dislikedProducts" labelTitle="Czego nie lubisz jeść?" />
+        <AddItem name="likedVegetables" labelTitle="Jakie warzywa lubisz?" />
+        <AddItem name="unlikedVegetables" labelTitle="Jakich warzyw nie lubisz?" />
+        <AddItem name="likedFruits" labelTitle="Jakie owoce lubisz?" />
+        <AddItem name="unlikedFruits" labelTitle="Jakich owoców nie lubisz?" />
+      </>
+    );
   };
 
   return (
