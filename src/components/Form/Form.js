@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import StyledForm from "./Form.styled";
 
@@ -10,10 +10,10 @@ import AddItem from "../AddItem";
 import InputRange from "../InputRange";
 import InputCheckboxList from "../InputCheckboxList";
 
-import { useChangeHandler } from "../../hooks";
+import { useChangeHandler, useValidation } from "../../hooks";
 
 const Form = () => {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
 
   // firstStep
   const { value: firstName, onChange: onChangeFirstName, clear: firstNameInputClear } = useChangeHandler();
@@ -39,8 +39,6 @@ const Form = () => {
   const { value: dietHelp, onChange: onChangeDietHelp, clear: dietHelpInputClear } = useChangeHandler();
   const { value: diseases, onChange: onChangeDiseases, clear: diseasesInputClear } = useChangeHandler();
   const { value: suplements, onChange: onChangeSuplements, clear: suplementsInputClear } = useChangeHandler();
-  const [snaksRange, setSnaksRange] = useState("Często");
-  const [waterRange, setWaterRange] = useState("Od 2 litrów do 3 litrów");
 
   // thirdStep
   const { value: meat, onChange: onChangeMeat, clear: meatInputClear } = useChangeHandler();
@@ -52,12 +50,47 @@ const Form = () => {
   const [dislikedVegetables, setDislikedVegetables] = useState([]);
   const [likedFruits, setLikedFruits] = useState([]);
   const [dislikedFruits, setDislikedFruits] = useState([]);
+  const [snaksRange, setSnaksRange] = useState("Często");
+  const [waterRange, setWaterRange] = useState("Od 2 litrów do 3 litrów");
 
   //fourthStep
   const [mealsRange, setMealsRange] = useState("Od 4 do 5");
   const [moneyRange, setMoneyRange] = useState("Od 150 zł do 200 zł");
   const { value: meals, onChange: onChangeMeals, clear: mealsInputClear } = useChangeHandler();
   const [mealsMustBe, setMealsMustBe] = useState([]);
+
+  //firstStepAlerts
+  const { alert: firstNameAlert, displayMessage: setFirstNameAlert } = useValidation();
+  const { alert: lastNameAlert, displayMessage: setLastNameAlert } = useValidation();
+  const { alert: heightAlert, displayMessage: setHeightAlert } = useValidation();
+  const { alert: weightAlert, displayMessage: setWeightAlert } = useValidation();
+  const { alert: targetAlert, displayMessage: setTargetAlert } = useValidation();
+
+  //secondStepAlerts
+  const { alert: workAlert, displayMessage: setWorkAlert } = useValidation();
+  const { alert: activityAlert, displayMessage: setActivityAlert } = useValidation();
+  const { alert: dietHelpAlert, displayMessage: setDietHelpAlert } = useValidation();
+  const { alert: diseasesAlert, displayMessage: setDiseasesAlert } = useValidation();
+  const { alert: suplementsAlert, displayMessage: setSuplementsAlert } = useValidation();
+
+  //thirdStepAlerts
+  const { alert: meatAlert, displayMessage: setMeatAlert } = useValidation();
+  const { alert: dairyAlert, displayMessage: setDairyAlert } = useValidation();
+  const { alert: likedProductsAlert, displayMessage: setLikedProductsAlert } = useValidation();
+  const { alert: dislikedProductsAlert, displayMessage: setDislikedProductsAlert } = useValidation();
+  const { alert: likedVegetablesAlert, displayMessage: setLikedVegetablesAlert } = useValidation();
+  const { alert: dislikedVegetablesAlert, displayMessage: setDislikedVegetablesAlert } = useValidation();
+  const { alert: likedFruitsAlert, displayMessage: setLikedFruitsAlert } = useValidation();
+  const { alert: dislikedFruitsAlert, displayMessage: setDislikedFruitsAlert } = useValidation();
+  const { alert: drinkAlert, displayMessage: setDrinkAlert } = useValidation();
+
+  //fourthStepAlerts
+  const { alert: mealsAlert, displayMessage: setMealsAlert } = useValidation();
+  const { alert: mealsMustBeAlert, displayMessage: setMealsMustBeAlert } = useValidation();
+
+  const validateTextInput = (minLength, setAlertFn, input) => (input.length < minLength ? setAlertFn("źle") : setAlertFn(""));
+  const validateRadioInput = (name, setAlertFn) => (name === "" ? setAlertFn("MUSISZ ZAZNACZYĆ") : setAlertFn(""));
+  const validateAddToListInput = (name, setAlertFn, message) => (name.length === 0 ? setAlertFn(message) : setAlertFn(""));
 
   const prevStep = (e) => {
     e.preventDefault();
@@ -66,7 +99,39 @@ const Form = () => {
 
   const nextStep = (e) => {
     e.preventDefault();
-    if (step < 4) setStep(step + 1);
+    if (step === 1) {
+      validateTextInput(2, setFirstNameAlert, firstName);
+      validateTextInput(4, setLastNameAlert, lastName);
+      validateTextInput(2, setHeightAlert, height);
+      validateTextInput(1, setWeightAlert, weight);
+      validateRadioInput(target, setTargetAlert);
+      if (firstName.length >= 3 && lastName.length >= 3 && height.length >= 3 && weight.length >= 2 && target) setStep(step + 1);
+    }
+    if (step === 2) {
+      validateRadioInput(work, setWorkAlert);
+      validateRadioInput(activity, setActivityAlert);
+      validateRadioInput(dietHelp, setDietHelpAlert);
+      validateRadioInput(diseases, setDiseasesAlert);
+      validateRadioInput(suplements, setSuplementsAlert);
+      if (work && activity && dietHelp && diseases && suplements) setStep(step + 1);
+    }
+    if (step === 3) {
+      validateRadioInput(meat, setMeatAlert);
+      validateRadioInput(dairy, setDairyAlert);
+      validateAddToListInput(likedProducts, setLikedProductsAlert, "Wpisz ulubione produkty");
+      validateAddToListInput(dislikedProducts, setDislikedProductsAlert, "Wpisz nielubiane produkty");
+      validateAddToListInput(likedVegetables, setLikedVegetablesAlert, "Wpisz ulubione warzywa");
+      validateAddToListInput(dislikedVegetables, setDislikedVegetablesAlert, "Wpisz nielubiane warzywa");
+      validateAddToListInput(likedFruits, setLikedFruitsAlert, "Wpisz ulubione owoce");
+      validateAddToListInput(dislikedFruits, setDislikedFruitsAlert, "Wpisz nielubiane owoce");
+      validateRadioInput(drink, setDrinkAlert);
+      if (meat && dairy && likedProducts.length > 0 && dislikedProducts.length > 0 && likedVegetables.length > 0 && dislikedVegetables.length > 0 && likedFruits.length > 0 && dislikedFruits.length > 0 && drink) setStep(step + 1);
+    }
+    if (step === 4) {
+      validateRadioInput(meals, setMealsAlert);
+      validateAddToListInput(mealsMustBe, setMealsMustBeAlert, "Wpisz posiłki bez których się nie obejdzie");
+      if (meals && mealsMustBe.length > 0) setStep(step + 1);
+    }
   };
 
   const firstStep = () => {
@@ -99,14 +164,20 @@ const Form = () => {
         reader.readAsDataURL(file);
       }
     };
+
     return (
       <>
-        <CustomInput type="text" name="firstName" labelTitle="Imię:" value={firstName} onChange={onChangeFirstName} />
-        <CustomInput type="text" name="lastName" labelTitle="Nazwisko:" value={lastName} onChange={onChangeLastName} />
-        <CustomInput type="number" name="height" labelTitle="Wzrost:" addendum="cm" value={height} onChange={onChangeHeight} />
-        <CustomInput type="number" name="weight" labelTitle="Waga:" addendum="kg" value={weight} onChange={onChangeWeight} />
+        <CustomInput type="text" name="firstName" labelTitle="Imię:" value={firstName} onChange={onChangeFirstName} onKeyUp={() => validateTextInput(4, setFirstNameAlert, firstName)} />
+        <span>{firstNameAlert}</span>
+        <CustomInput type="text" name="lastName" labelTitle="Nazwisko:" value={lastName} onChange={onChangeLastName} onKeyUp={() => validateTextInput(4, setLastNameAlert, lastName)} />
+        <span>{lastNameAlert}</span>
+        <CustomInput type="number" name="height" labelTitle="Wzrost:" addendum="cm" value={height} onChange={onChangeHeight} onKeyUp={() => validateTextInput(2, setHeightAlert, height)} />
+        <span>{heightAlert}</span>
+        <CustomInput type="number" name="weight" labelTitle="Waga:" addendum="kg" value={weight} onChange={onChangeWeight} onKeyUp={() => validateTextInput(1, setWeightAlert, weight)} />
+        <span>{weightAlert}</span>
         <Dropdown dropdownName="Pomiary ciała" items={dropdownItems} type="number" />
-        <InputRadioList title="Cel" items={inputRadioItems} onChange={onChangeTarget} value={target} />
+        <span>{targetAlert}</span>
+        <InputRadioList title="Cel:" items={inputRadioItems} onChange={onChangeTarget} value={target} />
         <CustomInput type="file" onChange={getFile} />
         <ul>
           {images.map((image, index) => (
@@ -144,10 +215,15 @@ const Form = () => {
 
     return (
       <>
-        <InputRadioList title="Jaki rodzaj pracy wykonujesz?" items={inputRadioWorkItems} onChange={onChangeWork} name={work} />
+        <span>{workAlert}</span>
+        <InputRadioList title="Jaki rodzaj pracy wykonujesz?" items={inputRadioWorkItems} onChange={onChangeWork} value={work} />
+        <span>{activityAlert}</span>
         <InputRadioList title="Jaki jest Twój poziom aktywności fizycznej?" items={inputRadioActivityItems} onChange={onChangeActivity} value={activity} />
+        <span>{dietHelpAlert}</span>
         <InputRadioList title="Czy korzystałeś kiedyś z pomocy dietetyka?" items={inputRadioDietHelpItems} onChange={onChangeDietHelp} value={dietHelp} />
-        <InputRadioList title="Czy chorujesz na coś?" items={inputRadioDiseasesItems} onChange={onChangeDiseases} name={diseases} />
+        <span>{diseasesAlert}</span>
+        <InputRadioList title="Czy chorujesz na coś?" items={inputRadioDiseasesItems} onChange={onChangeDiseases} value={diseases} />
+        <span>{suplementsAlert}</span>
         <InputRadioList title="Czy stosujesz jakąś suplementację?" items={inputRadioSuplementsItems} onChange={onChangeSuplements} value={suplements} />
       </>
     );
@@ -165,9 +241,9 @@ const Form = () => {
       { value: "noDairy", name: "dairy", labelTitle: "Nie" },
     ];
     const inputRadioDrinkItems = [
-      { value: "dairy", name: "dairy", labelTitle: "Woda" },
-      { value: "juice", name: "dairy", labelTitle: "Soki" },
-      { value: "carbonatedBeverage", name: "dairy", labelTitle: "Napoje gazowane" },
+      { value: "dairy", name: "drink", labelTitle: "Woda" },
+      { value: "juice", name: "drink", labelTitle: "Soki" },
+      { value: "carbonatedBeverage", name: "drink", labelTitle: "Napoje gazowane" },
     ];
     const snaksConditions = (e) => {
       const value = e.target.value;
@@ -185,15 +261,24 @@ const Form = () => {
     };
     return (
       <>
+        <span>{meatAlert}</span>
         <InputRadioList title="Czy jesz mięso i ryby?" items={inputRadioMeatItems} onChange={onChangeMeat} value={meat} />
+        <span>{dairyAlert}</span>
         <InputRadioList title="Czy jesz nabiał?" items={inputRadioDairyItems} onChange={onChangeDairy} value={dairy} />
-        <AddItem name="likedProducts" labelTitle="Jakie są Twoje ulubione produkty?" getItems={setLikedProducts} />
-        <AddItem name="dislikedProducts" labelTitle="Czego nie lubisz jeść?" getItems={setDislikedProducts} />
-        <AddItem name="likedVegetables" labelTitle="Jakie warzywa lubisz?" getItems={setLikedVegetables} />
-        <AddItem name="dislikedVegetables" labelTitle="Jakich warzyw nie lubisz?" getItems={setDislikedVegetables} />
-        <AddItem name="likedFruits" labelTitle="Jakie owoce lubisz?" getItems={setLikedFruits} />
-        <AddItem name="dislikedFruits" labelTitle="Jakich owoców nie lubisz?" getItems={setDislikedFruits} />
+        <span>{likedProductsAlert}</span>
+        <AddItem name="likedProducts" labelTitle="Jakie są Twoje ulubione produkty?" getItems={setLikedProducts} deleteAlert={() => setLikedProductsAlert("")} />
+        <span>{dislikedProductsAlert}</span>
+        <AddItem name="dislikedProducts" labelTitle="Czego nie lubisz jeść?" getItems={setDislikedProducts} deleteAlert={() => setDislikedProductsAlert("")} />
+        <span>{likedVegetablesAlert}</span>
+        <AddItem name="likedVegetables" labelTitle="Jakie warzywa lubisz?" getItems={setLikedVegetables} deleteAlert={() => setLikedVegetablesAlert("")} />
+        <span>{dislikedVegetablesAlert}</span>
+        <AddItem name="dislikedVegetables" labelTitle="Jakich warzyw nie lubisz?" getItems={setDislikedVegetables} deleteAlert={() => setDislikedVegetablesAlert("")} />
+        <span>{likedFruitsAlert}</span>
+        <AddItem name="likedFruits" labelTitle="Jakie owoce lubisz?" getItems={setLikedFruits} deleteAlert={() => setLikedFruitsAlert("")} />
+        <span>{dislikedFruitsAlert}</span>
+        <AddItem name="dislikedFruits" labelTitle="Jakich owoców nie lubisz?" getItems={setDislikedFruits} deleteAlert={() => setDislikedFruitsAlert("")} />
         <InputRange labelTitle="Jak często sięgasz po przekąski?" min={0} max={100} step={1} onChange={snaksConditions} text={snaksRange} />
+        <span>{drinkAlert}</span>
         <InputRadioList title="Co zazwyczaj pijesz w ciągu dnia?" items={inputRadioDrinkItems} onChange={onChangeDrink} value={drink} />
         <InputRange labelTitle="Ile pijesz wody w ciągu dnia?" min={0} max={100} step={1} onChange={waterConditions} text={waterRange} />
       </>
@@ -236,8 +321,10 @@ const Form = () => {
     return (
       <>
         <InputRange labelTitle="Ile posiłków chcesz jeść w ciągu dnia?" min={0} max={100} step={1} onChange={mealsConditions} text={mealsRange} />
+        {mealsAlert}
         <InputRadioList title="Jakie powinny być twoje posiłki?" items={inputRadioMealsItems} onChange={onChangeMeals} value={meals} />
-        <AddItem name="mealsMustBe" labelTitle="Co musi się znaleźć w Twoim jadłospisie?" getItems={setMealsMustBe} />
+        {mealsMustBeAlert}
+        <AddItem name="mealsMustBe" labelTitle="Co musi się znaleźć w Twoim jadłospisie?" getItems={setMealsMustBe} deleteAlert={() => setMealsMustBeAlert("")} />
         <InputRange labelTitle="Jaki budżet tygodniowo chcesz przeznaczać na jedzenie?" min={0} max={100} step={1} onChange={moneyConditions} text={moneyRange} />
         <InputCheckboxList title="Jakim sprzętem kuchennym dysponujesz?" items={inputCheckboxCookwareItems} />
       </>

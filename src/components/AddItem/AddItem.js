@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import StyledAddItem from "./AddItem.styled";
 
@@ -9,21 +9,22 @@ const AddItem = (props) => {
   const [value, setValue] = useState("");
   const [items, setItems] = useState([]);
 
+  useEffect(() => {
+    props.getItems(items);
+  });
+
   const clickHandler = (e) => {
     e.preventDefault();
-    setItems([...items, value]);
-    setValue("");
-    props.getItems(items);
+    if (value !== "") {
+      setItems([...items, value]);
+      setValue("");
+      props.deleteAlert();
+    }
   };
 
   return (
     <StyledAddItem {...props}>
-      <CustomInput
-        type="text"
-        name={props.name}
-        labelTitle={props.labelTitle}
-        onChange={(e) => setValue(e.target.value)}
-      />
+      <CustomInput type="text" name={props.name} labelTitle={props.labelTitle} onChange={(e) => setValue(e.target.value)} />
       <Button onClick={clickHandler}>Dodaj</Button>
       {items.map((item, index) => (
         <li key={index}>{item}</li>
