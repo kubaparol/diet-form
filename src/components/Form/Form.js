@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import StyledForm from "./Form.styled";
+import { StyledForm, StyledRow } from "./Form.styled";
 
 import Button from "../Button";
 import CustomInput from "../CustomInput";
@@ -10,19 +10,21 @@ import AddItem from "../AddItem";
 import InputRange from "../InputRange";
 import InputCheckboxList from "../InputCheckboxList";
 
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+
 import { useChangeHandler, useValidation } from "../../hooks";
 
 const Form = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(3);
 
-  // firstStep
+  // first step
   const { value: firstName, onChange: onChangeFirstName, clear: firstNameInputClear } = useChangeHandler();
   const { value: lastName, onChange: onChangeLastName, clear: lastNameInputClear } = useChangeHandler();
   const { value: height, onChange: onChangeHeight, clear: heightInputClear } = useChangeHandler();
   const { value: weight, onChange: onChangeWeight, clear: weightInputClear } = useChangeHandler();
   const { value: target, onChange: onChangeTarget, clear: targetInputClear } = useChangeHandler();
   const [images, setImages] = useState([]);
-  // dropdown measurments
+  // dropdown measurments in first step
   const { value: chest, onChange: onChangeChest, clear: chestInputClear } = useChangeHandler();
   const { value: bicepsL, onChange: onChangeBicepsL, clear: bicepsLInputClear } = useChangeHandler();
   const { value: bicepsR, onChange: onChangeBicepsR, clear: bicepsRInputClear } = useChangeHandler();
@@ -33,14 +35,14 @@ const Form = () => {
   const { value: calfL, onChange: onChangeCalfL, clear: calfLInputClear } = useChangeHandler();
   const { value: calfR, onChange: onChangeCalfR, clear: calfRInputClear } = useChangeHandler();
 
-  // secondStep
+  // second step
   const { value: work, onChange: onChangeWork, clear: workInputClear } = useChangeHandler();
   const { value: activity, onChange: onChangeActivity, clear: activityInputClear } = useChangeHandler();
   const { value: dietHelp, onChange: onChangeDietHelp, clear: dietHelpInputClear } = useChangeHandler();
   const { value: diseases, onChange: onChangeDiseases, clear: diseasesInputClear } = useChangeHandler();
   const { value: suplements, onChange: onChangeSuplements, clear: suplementsInputClear } = useChangeHandler();
 
-  // thirdStep
+  // third step
   const { value: meat, onChange: onChangeMeat, clear: meatInputClear } = useChangeHandler();
   const { value: dairy, onChange: onChangeDairy, clear: dairyInputClear } = useChangeHandler();
   const { value: drink, onChange: onChangeDrink, clear: drinkInputClear } = useChangeHandler();
@@ -53,27 +55,27 @@ const Form = () => {
   const [snaksRange, setSnaksRange] = useState("Często");
   const [waterRange, setWaterRange] = useState("Od 2 litrów do 3 litrów");
 
-  //fourthStep
+  //fourth step
   const [mealsRange, setMealsRange] = useState("Od 4 do 5");
   const [moneyRange, setMoneyRange] = useState("Od 150 zł do 200 zł");
   const { value: meals, onChange: onChangeMeals, clear: mealsInputClear } = useChangeHandler();
   const [mealsMustBe, setMealsMustBe] = useState([]);
 
-  //firstStepAlerts
+  // first step alerts
   const { alert: firstNameAlert, displayMessage: setFirstNameAlert } = useValidation();
   const { alert: lastNameAlert, displayMessage: setLastNameAlert } = useValidation();
   const { alert: heightAlert, displayMessage: setHeightAlert } = useValidation();
   const { alert: weightAlert, displayMessage: setWeightAlert } = useValidation();
   const { alert: targetAlert, displayMessage: setTargetAlert } = useValidation();
 
-  //secondStepAlerts
+  // second step alerts
   const { alert: workAlert, displayMessage: setWorkAlert } = useValidation();
   const { alert: activityAlert, displayMessage: setActivityAlert } = useValidation();
   const { alert: dietHelpAlert, displayMessage: setDietHelpAlert } = useValidation();
   const { alert: diseasesAlert, displayMessage: setDiseasesAlert } = useValidation();
   const { alert: suplementsAlert, displayMessage: setSuplementsAlert } = useValidation();
 
-  //thirdStepAlerts
+  //third step alerts
   const { alert: meatAlert, displayMessage: setMeatAlert } = useValidation();
   const { alert: dairyAlert, displayMessage: setDairyAlert } = useValidation();
   const { alert: likedProductsAlert, displayMessage: setLikedProductsAlert } = useValidation();
@@ -84,12 +86,12 @@ const Form = () => {
   const { alert: dislikedFruitsAlert, displayMessage: setDislikedFruitsAlert } = useValidation();
   const { alert: drinkAlert, displayMessage: setDrinkAlert } = useValidation();
 
-  //fourthStepAlerts
+  //fourth step alerts
   const { alert: mealsAlert, displayMessage: setMealsAlert } = useValidation();
   const { alert: mealsMustBeAlert, displayMessage: setMealsMustBeAlert } = useValidation();
 
-  const validateTextInput = (minLength, setAlertFn, input) => (input.length < minLength ? setAlertFn("źle") : setAlertFn(""));
-  const validateRadioInput = (name, setAlertFn) => (name === "" ? setAlertFn("MUSISZ ZAZNACZYĆ") : setAlertFn(""));
+  const validateTextInput = (minLength, setAlertFn, input, message) => (input.length < minLength ? setAlertFn(message) : setAlertFn(""));
+  const validateRadioInput = (name, setAlertFn) => (name === "" ? setAlertFn("Nie wybrano") : setAlertFn(""));
   const validateAddToListInput = (name, setAlertFn, message) => (name.length === 0 ? setAlertFn(message) : setAlertFn(""));
 
   const prevStep = (e) => {
@@ -100,10 +102,10 @@ const Form = () => {
   const nextStep = (e) => {
     e.preventDefault();
     if (step === 1) {
-      validateTextInput(2, setFirstNameAlert, firstName);
-      validateTextInput(4, setLastNameAlert, lastName);
-      validateTextInput(2, setHeightAlert, height);
-      validateTextInput(1, setWeightAlert, weight);
+      validateTextInput(3, setFirstNameAlert, firstName, "Imię musi składać się z min. 3 znaków");
+      validateTextInput(3, setLastNameAlert, lastName, "Nazwisko musi składać się z min. 3 znaków");
+      validateTextInput(3, setHeightAlert, height, "Wprowadź poprawny wzrost");
+      validateTextInput(2, setWeightAlert, weight, "Wprowadź poprawną wagę");
       validateRadioInput(target, setTargetAlert);
       if (firstName.length >= 3 && lastName.length >= 3 && height.length >= 3 && weight.length >= 2 && target) setStep(step + 1);
     }
@@ -118,12 +120,12 @@ const Form = () => {
     if (step === 3) {
       validateRadioInput(meat, setMeatAlert);
       validateRadioInput(dairy, setDairyAlert);
-      validateAddToListInput(likedProducts, setLikedProductsAlert, "Wpisz ulubione produkty");
-      validateAddToListInput(dislikedProducts, setDislikedProductsAlert, "Wpisz nielubiane produkty");
-      validateAddToListInput(likedVegetables, setLikedVegetablesAlert, "Wpisz ulubione warzywa");
-      validateAddToListInput(dislikedVegetables, setDislikedVegetablesAlert, "Wpisz nielubiane warzywa");
-      validateAddToListInput(likedFruits, setLikedFruitsAlert, "Wpisz ulubione owoce");
-      validateAddToListInput(dislikedFruits, setDislikedFruitsAlert, "Wpisz nielubiane owoce");
+      validateAddToListInput(likedProducts, setLikedProductsAlert, "Dodaj ulubione produkty");
+      validateAddToListInput(dislikedProducts, setDislikedProductsAlert, "Dodaj nielubiane produkty");
+      validateAddToListInput(likedVegetables, setLikedVegetablesAlert, "Dodaj ulubione warzywa");
+      validateAddToListInput(dislikedVegetables, setDislikedVegetablesAlert, "Dodaj nielubiane warzywa");
+      validateAddToListInput(likedFruits, setLikedFruitsAlert, "Dodaj ulubione owoce");
+      validateAddToListInput(dislikedFruits, setDislikedFruitsAlert, "Dodaj nielubiane owoce");
       validateRadioInput(drink, setDrinkAlert);
       if (meat && dairy && likedProducts.length > 0 && dislikedProducts.length > 0 && likedVegetables.length > 0 && dislikedVegetables.length > 0 && likedFruits.length > 0 && dislikedFruits.length > 0 && drink) setStep(step + 1);
     }
@@ -136,15 +138,15 @@ const Form = () => {
 
   const firstStep = () => {
     const dropdownItems = [
-      { title: "Klatka piersiowa:", name: "chest", add: "cm", type: "number", value: chest, onChange: onChangeChest },
-      { title: "Lewy biceps:", name: "bicepsL", add: "cm", type: "number", value: bicepsL, onChange: onChangeBicepsL },
-      { title: "Prawy biceps:", name: "bicepsR", add: "cm", type: "number", value: bicepsR, onChange: onChangeBicepsR },
-      { title: "Brzuch:", name: "belly", add: "cm", type: "number", value: belly, onChange: onChangeBelly },
-      { title: "Biodra:", name: "hips", add: "cm", type: "number", value: hips, onChange: onChangeHips },
-      { title: "Lewe udo:", name: "thighL", add: "cm", type: "number", value: thighL, onChange: onChangeThighL },
-      { title: "Prawe udo:", name: "thighR", add: "cm", type: "number", value: thighR, onChange: onChangeThighR },
-      { title: "Lewa łydka:", name: "calfL", add: "cm", type: "number", value: calfL, onChange: onChangeCalfL },
-      { title: "Prawa łydka:", name: "calfR", add: "cm", type: "number", value: calfR, onChange: onChangeCalfR },
+      { title: "Klatka piersiowa", name: "chest", add: "cm", type: "number", value: chest, onChange: onChangeChest },
+      { title: "Lewy biceps", name: "bicepsL", add: "cm", type: "number", value: bicepsL, onChange: onChangeBicepsL },
+      { title: "Prawy biceps", name: "bicepsR", add: "cm", type: "number", value: bicepsR, onChange: onChangeBicepsR },
+      { title: "Brzuch", name: "belly", add: "cm", type: "number", value: belly, onChange: onChangeBelly },
+      { title: "Biodra", name: "hips", add: "cm", type: "number", value: hips, onChange: onChangeHips },
+      { title: "Lewe udo", name: "thighL", add: "cm", type: "number", value: thighL, onChange: onChangeThighL },
+      { title: "Prawe udo", name: "thighR", add: "cm", type: "number", value: thighR, onChange: onChangeThighR },
+      { title: "Lewa łydka", name: "calfL", add: "cm", type: "number", value: calfL, onChange: onChangeCalfL },
+      { title: "Prawa łydka", name: "calfR", add: "cm", type: "number", value: calfR, onChange: onChangeCalfR },
     ];
     const inputRadioItems = [
       { value: "loseWeight", name: "target", labelTitle: "Chcę schudnąć" },
@@ -167,25 +169,30 @@ const Form = () => {
 
     return (
       <>
-        <CustomInput type="text" name="firstName" labelTitle="Imię:" value={firstName} onChange={onChangeFirstName} onKeyUp={() => validateTextInput(4, setFirstNameAlert, firstName)} />
-        <span>{firstNameAlert}</span>
-        <CustomInput type="text" name="lastName" labelTitle="Nazwisko:" value={lastName} onChange={onChangeLastName} onKeyUp={() => validateTextInput(4, setLastNameAlert, lastName)} />
-        <span>{lastNameAlert}</span>
-        <CustomInput type="number" name="height" labelTitle="Wzrost:" addendum="cm" value={height} onChange={onChangeHeight} onKeyUp={() => validateTextInput(2, setHeightAlert, height)} />
-        <span>{heightAlert}</span>
-        <CustomInput type="number" name="weight" labelTitle="Waga:" addendum="kg" value={weight} onChange={onChangeWeight} onKeyUp={() => validateTextInput(1, setWeightAlert, weight)} />
-        <span>{weightAlert}</span>
+        <CustomInput type="text" name="firstName" placeholder="Imię" value={firstName} alert={firstNameAlert} onChange={onChangeFirstName} onKeyUp={() => validateTextInput(3, setFirstNameAlert, firstName, "Imię musi składać się z min. 3 znaków")} />
+        <CustomInput
+          type="text"
+          name="lastName"
+          placeholder="Nazwisko"
+          value={lastName}
+          alert={lastNameAlert}
+          onChange={onChangeLastName}
+          onKeyUp={() => validateTextInput(3, setLastNameAlert, lastName, "Nazwisko musi składać się z min. 3 znaków")}
+        />
+        <CustomInput type="number" name="height" placeholder="Wzrost" value={height} alert={heightAlert} onChange={onChangeHeight} onKeyUp={() => validateTextInput(3, setHeightAlert, height, "Wprowadź poprawny wzrost")} />
+        <CustomInput type="number" name="weight" placeholder="Waga" value={weight} alert={weightAlert} onChange={onChangeWeight} onKeyUp={() => validateTextInput(2, setWeightAlert, weight, "Wprowadź poprawną wagę")} />
         <Dropdown dropdownName="Pomiary ciała" items={dropdownItems} type="number" />
-        <span>{targetAlert}</span>
-        <InputRadioList title="Cel:" items={inputRadioItems} onChange={onChangeTarget} value={target} />
-        <CustomInput type="file" onChange={getFile} />
-        <ul>
-          {images.map((image, index) => (
-            <li key={index}>
-              <img src={image} />
-            </li>
-          ))}
-        </ul>
+        <InputRadioList title="Cel" items={inputRadioItems} onChange={onChangeTarget} value={target} alert={targetAlert} />
+        <CustomInput type="file" onChange={getFile} inputType="file" />
+        {images.length !== 0 ? (
+          <ol>
+            {images.map((image, index) => (
+              <li key={index}>
+                <img src={image} />
+              </li>
+            ))}
+          </ol>
+        ) : null}
       </>
     );
   };
@@ -215,16 +222,11 @@ const Form = () => {
 
     return (
       <>
-        <span>{workAlert}</span>
-        <InputRadioList title="Jaki rodzaj pracy wykonujesz?" items={inputRadioWorkItems} onChange={onChangeWork} value={work} />
-        <span>{activityAlert}</span>
-        <InputRadioList title="Jaki jest Twój poziom aktywności fizycznej?" items={inputRadioActivityItems} onChange={onChangeActivity} value={activity} />
-        <span>{dietHelpAlert}</span>
-        <InputRadioList title="Czy korzystałeś kiedyś z pomocy dietetyka?" items={inputRadioDietHelpItems} onChange={onChangeDietHelp} value={dietHelp} />
-        <span>{diseasesAlert}</span>
-        <InputRadioList title="Czy chorujesz na coś?" items={inputRadioDiseasesItems} onChange={onChangeDiseases} value={diseases} />
-        <span>{suplementsAlert}</span>
-        <InputRadioList title="Czy stosujesz jakąś suplementację?" items={inputRadioSuplementsItems} onChange={onChangeSuplements} value={suplements} />
+        <InputRadioList title="Jaki rodzaj pracy wykonujesz?" items={inputRadioWorkItems} onChange={onChangeWork} value={work} alert={workAlert} />
+        <InputRadioList title="Jaki jest Twój poziom aktywności fizycznej?" items={inputRadioActivityItems} onChange={onChangeActivity} value={activity} alert={activityAlert} />
+        <InputRadioList title="Czy korzystałeś kiedyś z pomocy dietetyka?" items={inputRadioDietHelpItems} onChange={onChangeDietHelp} value={dietHelp} alert={dietHelpAlert} />
+        <InputRadioList title="Czy chorujesz na coś?" items={inputRadioDiseasesItems} onChange={onChangeDiseases} value={diseases} alert={diseasesAlert} />
+        <InputRadioList title="Czy stosujesz jakąś suplementację?" items={inputRadioSuplementsItems} onChange={onChangeSuplements} value={suplements} alert={suplementsAlert} />
       </>
     );
   };
@@ -261,25 +263,16 @@ const Form = () => {
     };
     return (
       <>
-        <span>{meatAlert}</span>
-        <InputRadioList title="Czy jesz mięso i ryby?" items={inputRadioMeatItems} onChange={onChangeMeat} value={meat} />
-        <span>{dairyAlert}</span>
-        <InputRadioList title="Czy jesz nabiał?" items={inputRadioDairyItems} onChange={onChangeDairy} value={dairy} />
-        <span>{likedProductsAlert}</span>
-        <AddItem name="likedProducts" labelTitle="Jakie są Twoje ulubione produkty?" getItems={setLikedProducts} deleteAlert={() => setLikedProductsAlert("")} />
-        <span>{dislikedProductsAlert}</span>
-        <AddItem name="dislikedProducts" labelTitle="Czego nie lubisz jeść?" getItems={setDislikedProducts} deleteAlert={() => setDislikedProductsAlert("")} />
-        <span>{likedVegetablesAlert}</span>
-        <AddItem name="likedVegetables" labelTitle="Jakie warzywa lubisz?" getItems={setLikedVegetables} deleteAlert={() => setLikedVegetablesAlert("")} />
-        <span>{dislikedVegetablesAlert}</span>
-        <AddItem name="dislikedVegetables" labelTitle="Jakich warzyw nie lubisz?" getItems={setDislikedVegetables} deleteAlert={() => setDislikedVegetablesAlert("")} />
-        <span>{likedFruitsAlert}</span>
-        <AddItem name="likedFruits" labelTitle="Jakie owoce lubisz?" getItems={setLikedFruits} deleteAlert={() => setLikedFruitsAlert("")} />
-        <span>{dislikedFruitsAlert}</span>
-        <AddItem name="dislikedFruits" labelTitle="Jakich owoców nie lubisz?" getItems={setDislikedFruits} deleteAlert={() => setDislikedFruitsAlert("")} />
+        <InputRadioList title="Czy jesz mięso i ryby?" items={inputRadioMeatItems} onChange={onChangeMeat} value={meat} alert={meatAlert} />
+        <InputRadioList title="Czy jesz nabiał?" items={inputRadioDairyItems} onChange={onChangeDairy} value={dairy} alert={dairyAlert} />
+        <AddItem name="likedProducts" labelTitle="Jakie są Twoje ulubione produkty?" getItems={setLikedProducts} deleteAlert={() => setLikedProductsAlert("")} alert={likedProductsAlert} />
+        <AddItem name="dislikedProducts" labelTitle="Czego nie lubisz jeść?" getItems={setDislikedProducts} deleteAlert={() => setDislikedProductsAlert("")} alert={dislikedProductsAlert} />
+        <AddItem name="likedVegetables" labelTitle="Jakie warzywa lubisz?" getItems={setLikedVegetables} deleteAlert={() => setLikedVegetablesAlert("")} alert={likedVegetablesAlert} />
+        <AddItem name="dislikedVegetables" labelTitle="Jakich warzyw nie lubisz?" getItems={setDislikedVegetables} deleteAlert={() => setDislikedVegetablesAlert("")} alert={dislikedVegetablesAlert} />
+        <AddItem name="likedFruits" labelTitle="Jakie owoce lubisz?" getItems={setLikedFruits} deleteAlert={() => setLikedFruitsAlert("")} alert={likedFruitsAlert} />
+        <AddItem name="dislikedFruits" labelTitle="Jakich owoców nie lubisz?" getItems={setDislikedFruits} deleteAlert={() => setDislikedFruitsAlert("")} alert={dislikedFruitsAlert} />
         <InputRange labelTitle="Jak często sięgasz po przekąski?" min={0} max={100} step={1} onChange={snaksConditions} text={snaksRange} />
-        <span>{drinkAlert}</span>
-        <InputRadioList title="Co zazwyczaj pijesz w ciągu dnia?" items={inputRadioDrinkItems} onChange={onChangeDrink} value={drink} />
+        <InputRadioList title="Co zazwyczaj pijesz w ciągu dnia?" items={inputRadioDrinkItems} onChange={onChangeDrink} value={drink} alert={drinkAlert} />
         <InputRange labelTitle="Ile pijesz wody w ciągu dnia?" min={0} max={100} step={1} onChange={waterConditions} text={waterRange} />
       </>
     );
@@ -321,10 +314,8 @@ const Form = () => {
     return (
       <>
         <InputRange labelTitle="Ile posiłków chcesz jeść w ciągu dnia?" min={0} max={100} step={1} onChange={mealsConditions} text={mealsRange} />
-        {mealsAlert}
-        <InputRadioList title="Jakie powinny być twoje posiłki?" items={inputRadioMealsItems} onChange={onChangeMeals} value={meals} />
-        {mealsMustBeAlert}
-        <AddItem name="mealsMustBe" labelTitle="Co musi się znaleźć w Twoim jadłospisie?" getItems={setMealsMustBe} deleteAlert={() => setMealsMustBeAlert("")} />
+        <InputRadioList title="Jakie powinny być twoje posiłki?" items={inputRadioMealsItems} onChange={onChangeMeals} value={meals} alert={mealsAlert} />
+        <AddItem name="mealsMustBe" labelTitle="Co musi się znaleźć w Twoim jadłospisie?" getItems={setMealsMustBe} deleteAlert={() => setMealsMustBeAlert("")} alert={mealsMustBeAlert} />
         <InputRange labelTitle="Jaki budżet tygodniowo chcesz przeznaczać na jedzenie?" min={0} max={100} step={1} onChange={moneyConditions} text={moneyRange} />
         <InputCheckboxList title="Jakim sprzętem kuchennym dysponujesz?" items={inputCheckboxCookwareItems} />
       </>
@@ -332,14 +323,18 @@ const Form = () => {
   };
 
   return (
-    <StyledForm>
-      {step === 1 && firstStep()}
-      {step === 2 && secondStep()}
-      {step === 3 && thirdStep()}
-      {step === 4 && fourthStep()}
-      <Button onClick={prevStep}>Wstecz</Button>
-      <Button onClick={nextStep}>Dalej</Button>
-    </StyledForm>
+    <>
+      <StyledForm>
+        {step === 1 && firstStep()}
+        {step === 2 && secondStep()}
+        {step === 3 && thirdStep()}
+        {step === 4 && fourthStep()}
+      </StyledForm>
+      <StyledRow>
+        <Button onClick={prevStep} icon={faChevronLeft} />
+        <Button onClick={nextStep} icon={faChevronRight} />
+      </StyledRow>
+    </>
   );
 };
 

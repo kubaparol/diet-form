@@ -6,10 +6,10 @@ import Label from "../Label";
 
 const CustomInput = (props) => {
   return (
-    <Label fieldName={props.name}>
+    <Label fieldName={props.name} inputType={props.inputType}>
       {props.labelTitle}
       <StyledCustomInput {...props}></StyledCustomInput>
-      {props.addendum}
+      <span style={{ marginBottom: "20px", textAlign: "center", color: "red" }}>{props.alert}</span>
     </Label>
   );
 };

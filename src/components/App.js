@@ -1,6 +1,7 @@
 import React from "react";
 
 import StyledNormalize from "../styled";
+import StyledApp from "./App.styled";
 
 import Form from "./Form";
 
@@ -8,7 +9,9 @@ const App = () => {
   return (
     <>
       <StyledNormalize />
-      <Form />
+      <StyledApp>
+        <Form />
+      </StyledApp>
     </>
   );
 };

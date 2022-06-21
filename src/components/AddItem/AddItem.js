@@ -5,6 +5,8 @@ import StyledAddItem from "./AddItem.styled";
 import CustomInput from "../CustomInput";
 import Button from "../Button";
 
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
 const AddItem = (props) => {
   const [value, setValue] = useState("");
   const [items, setItems] = useState([]);
@@ -23,13 +25,16 @@ const AddItem = (props) => {
   };
 
   return (
-    <StyledAddItem {...props}>
-      <CustomInput type="text" name={props.name} labelTitle={props.labelTitle} onChange={(e) => setValue(e.target.value)} />
-      <Button onClick={clickHandler}>Dodaj</Button>
-      {items.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
-    </StyledAddItem>
+    <>
+      <StyledAddItem {...props}>
+        <Button onClick={clickHandler} icon={faPlus} />
+        <CustomInput type="text" name={props.name} labelTitle={props.labelTitle} onChange={(e) => setValue(e.target.value)} />
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </StyledAddItem>
+      <p style={{ marginBottom: "20px", textAlign: "center", color: "red" }}>{props.alert}</p>
+    </>
   );
 };
 

@@ -9,7 +9,7 @@ const InputRange = (props) => {
     <Label fieldName={props.name}>
       {props.labelTitle}
       <StyledInputRange {...props} type="range" />
-      <span>{props.text}</span>
+      <span style={{ textAlign: "center", marginBottom: "15px" }}>{props.text}</span>
     </Label>
   );
 };

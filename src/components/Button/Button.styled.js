@@ -1,5 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const StyledButton = styled.button``;
+const StyledButton = styled.button`
+  border: none;
+`;
 
 export default StyledButton;
