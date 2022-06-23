@@ -1,30 +1,43 @@
 import React, { useState } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+
 import StyledDropdown from "./Dropdown.styled";
 
-import CustomInput from "../CustomInput";
-import Button from "../Button";
-
-import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import Row from "../Row";
+import Label from "../Label";
+import Field from "../Field";
 
 const Dropdown = (props) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <StyledDropdown {...props}>
-      <span onClick={() => (open === false ? setOpen(true) : setOpen(false))}>
-        <Button onClick={(e) => e.preventDefault()} icon={open === false ? faAngleDown : faAngleUp} />
-      </span>
-      <ul>
-        {props.dropdownName}
-        {props.items &&
-          open &&
-          props.items.map((item, index) => (
-            <li key={index}>
-              <CustomInput type={props.type} name={item.name} placeholder={item.title} addendum={item.add} value={item.value} onChange={item.onChange} />
-            </li>
-          ))}
-      </ul>
+    <StyledDropdown>
+      <header>
+        <p>{props.title}</p>
+        <p>
+          <FontAwesomeIcon
+            onClick={open ? () => setOpen(false) : () => setOpen(true)}
+            icon={open ? faAngleDown : faAngleRight}
+          />
+        </p>
+      </header>
+      {open
+        ? props.options.map((option, index) => {
+            return (
+              <Row key={index}>
+                <Label fieldName={option.fieldName}>{option.name}</Label>
+                <Field
+                  type={option.type ? option.type : option.fieldName}
+                  name={option.fieldName}
+                  value={option.value}
+                  onChange={option.onChange}
+                />
+              </Row>
+            );
+          })
+        : null}
     </StyledDropdown>
   );
 };
