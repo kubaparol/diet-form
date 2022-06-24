@@ -9,7 +9,7 @@ import Button from "../Button";
 import {
   faArrowLeft,
   faArrowRight,
-  faCircleXmark,
+  faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useChangeHandler, useValidation } from "../../hooks";
@@ -190,7 +190,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           value={meat}
         />
         {meatAlert !== "" && (
-          <Message icon={faCircleXmark}>{meatAlert}</Message>
+          <Message icon={faExclamationTriangle}>{meatAlert}</Message>
         )}
       </Row>
       <Row>
@@ -201,7 +201,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           value={dairy}
         />
         {dairyAlert !== "" && (
-          <Message icon={faCircleXmark}>{dairyAlert}</Message>
+          <Message icon={faExclamationTriangle}>{dairyAlert}</Message>
         )}
       </Row>
       <Row>
@@ -212,7 +212,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           value={drink}
         />
         {drinkAlert !== "" && (
-          <Message icon={faCircleXmark}>{drinkAlert}</Message>
+          <Message icon={faExclamationTriangle}>{drinkAlert}</Message>
         )}
       </Row>
       <Row>
@@ -224,7 +224,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           setAlert={setLikedProductsAlert}
         />
         {likedProductsAlert !== "" && (
-          <Message icon={faCircleXmark}>{likedProductsAlert}</Message>
+          <Message icon={faExclamationTriangle}>{likedProductsAlert}</Message>
         )}
       </Row>
       <Row>
@@ -236,7 +236,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           setAlert={setDislikedProductsAlert}
         />
         {dislikedProductsAlert !== "" && (
-          <Message icon={faCircleXmark}>{dislikedProductsAlert}</Message>
+          <Message icon={faExclamationTriangle}>{dislikedProductsAlert}</Message>
         )}
       </Row>
       <Row>
@@ -248,7 +248,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           setAlert={setLikedVegetablesAlert}
         />
         {likedVegetablesAlert !== "" && (
-          <Message icon={faCircleXmark}>{likedVegetablesAlert}</Message>
+          <Message icon={faExclamationTriangle}>{likedVegetablesAlert}</Message>
         )}
       </Row>
       <Row>
@@ -260,7 +260,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           setAlert={setDislikedVegetablesAlert}
         />
         {dislikedVegetablesAlert !== "" && (
-          <Message icon={faCircleXmark}>{dislikedVegetablesAlert}</Message>
+          <Message icon={faExclamationTriangle}>{dislikedVegetablesAlert}</Message>
         )}
       </Row>
       <Row>
@@ -272,7 +272,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           setAlert={setLikedFruitsAlert}
         />
         {likedFruitsAlert !== "" && (
-          <Message icon={faCircleXmark}>{likedFruitsAlert}</Message>
+          <Message icon={faExclamationTriangle}>{likedFruitsAlert}</Message>
         )}
       </Row>
       <Row>
@@ -284,7 +284,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           setAlert={setDislikedFruitsAlert}
         />
         {dislikedFruitsAlert !== "" && (
-          <Message icon={faCircleXmark}>{dislikedFruitsAlert}</Message>
+          <Message icon={faExclamationTriangle}>{dislikedFruitsAlert}</Message>
         )}
       </Row>
       <Row type="button">

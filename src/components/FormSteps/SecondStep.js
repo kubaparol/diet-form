@@ -8,7 +8,7 @@ import Message from "../Message";
 import {
   faArrowLeft,
   faArrowRight,
-  faCircleXmark,
+  faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useChangeHandler, useValidation } from "../../hooks";
@@ -130,7 +130,7 @@ const SecondStep = ({ data, getData, clickHandler }) => {
           value={data.work}
         />
         {workAlert !== "" && (
-          <Message icon={faCircleXmark}>{workAlert}</Message>
+          <Message icon={faExclamationTriangle}>{workAlert}</Message>
         )}
       </Row>
       <Row>
@@ -141,7 +141,7 @@ const SecondStep = ({ data, getData, clickHandler }) => {
           value={data.activity}
         />
         {activityAlert !== "" && (
-          <Message icon={faCircleXmark}>{activityAlert}</Message>
+          <Message icon={faExclamationTriangle}>{activityAlert}</Message>
         )}
       </Row>
       <Row>
@@ -152,7 +152,7 @@ const SecondStep = ({ data, getData, clickHandler }) => {
           value={data.dietHelp}
         />
         {dietHelpAlert !== "" && (
-          <Message icon={faCircleXmark}>{dietHelpAlert}</Message>
+          <Message icon={faExclamationTriangle}>{dietHelpAlert}</Message>
         )}
       </Row>
       <Row>
@@ -163,7 +163,7 @@ const SecondStep = ({ data, getData, clickHandler }) => {
           value={data.diseases}
         />
         {diseasesAlert !== "" && (
-          <Message icon={faCircleXmark}>{diseasesAlert}</Message>
+          <Message icon={faExclamationTriangle}>{diseasesAlert}</Message>
         )}
       </Row>
       <Row>
@@ -174,7 +174,7 @@ const SecondStep = ({ data, getData, clickHandler }) => {
           value={data.suplements}
         />
         {suplementsAlert !== "" && (
-          <Message icon={faCircleXmark}>{suplementsAlert}</Message>
+          <Message icon={faExclamationTriangle}>{suplementsAlert}</Message>
         )}
       </Row>
       <Row type="button">

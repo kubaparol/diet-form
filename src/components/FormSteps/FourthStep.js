@@ -7,8 +7,8 @@ import Message from "../Message";
 import Button from "../Button";
 import {
   faArrowLeft,
-  faArrowRight,
-  faCircleXmark,
+  faPaperPlane,
+  faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useChangeHandler, useValidation } from "../../hooks";
@@ -105,7 +105,7 @@ const FourthStep = ({ data, getData, clickHandler }) => {
           value={quantityMeals}
         />
         {quantityMealsAlert !== "" && (
-          <Message icon={faCircleXmark}>{quantityMealsAlert}</Message>
+          <Message icon={faExclamationTriangle}>{quantityMealsAlert}</Message>
         )}
       </Row>
       <Row>
@@ -116,7 +116,7 @@ const FourthStep = ({ data, getData, clickHandler }) => {
           value={typeMeals}
         />
         {typeMealsAlert !== "" && (
-          <Message icon={faCircleXmark}>{typeMealsAlert}</Message>
+          <Message icon={faExclamationTriangle}>{typeMealsAlert}</Message>
         )}
       </Row>
       <Row>
@@ -127,12 +127,12 @@ const FourthStep = ({ data, getData, clickHandler }) => {
           value={money}
         />
         {moneyAlert !== "" && (
-          <Message icon={faCircleXmark}>{moneyAlert}</Message>
+          <Message icon={faExclamationTriangle}>{moneyAlert}</Message>
         )}
       </Row>
       <Row type="button">
         <Button onClick={clickHandler} icon={faArrowLeft} id="prev" />
-        <Button onClick={validate} icon={faArrowRight} id="next" />
+        <Button onClick={validate} icon={faPaperPlane} id="next" id2="send" />
       </Row>
     </>
   );

@@ -11,7 +11,7 @@ import Message from "../Message";
 import {
   faArrowLeft,
   faArrowRight,
-  faCircleXmark,
+  faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useChangeHandler, useValidation } from "../../hooks";
@@ -184,7 +184,9 @@ const FirstStep = ({ data, getData, clickHandler }) => {
               : () => setFNAlert("")
           }
         />
-        {fNAlert !== "" && <Message icon={faCircleXmark}>{fNAlert}</Message>}
+        {fNAlert !== "" && (
+          <Message icon={faExclamationTriangle}>{fNAlert}</Message>
+        )}
       </Row>
       <Row>
         <Label fieldName="lastName">Nazwisko</Label>
@@ -198,7 +200,9 @@ const FirstStep = ({ data, getData, clickHandler }) => {
               : () => setLNAlert("")
           }
         />
-        {lNAlert !== "" && <Message icon={faCircleXmark}>{lNAlert}</Message>}
+        {lNAlert !== "" && (
+          <Message icon={faExclamationTriangle}>{lNAlert}</Message>
+        )}
       </Row>
       <Row>
         <Label fieldName="height">Wzrost</Label>
@@ -213,7 +217,9 @@ const FirstStep = ({ data, getData, clickHandler }) => {
               : () => setHAlert("")
           }
         />
-        {hAlert !== "" && <Message icon={faCircleXmark}>{hAlert}</Message>}
+        {hAlert !== "" && (
+          <Message icon={faExclamationTriangle}>{hAlert}</Message>
+        )}
       </Row>
       <Row>
         <Label fieldName="waga">Waga</Label>
@@ -228,7 +234,9 @@ const FirstStep = ({ data, getData, clickHandler }) => {
               : () => setWAlert("")
           }
         />
-        {wAlert !== "" && <Message icon={faCircleXmark}>{wAlert}</Message>}
+        {wAlert !== "" && (
+          <Message icon={faExclamationTriangle}>{wAlert}</Message>
+        )}
       </Row>
       <Row>
         <Dropdown title="Pomiary ciała" options={dropdownOptions} />
@@ -240,7 +248,9 @@ const FirstStep = ({ data, getData, clickHandler }) => {
           options={targetOptions}
           value={data.target}
         />
-        {tAlert !== "" && <Message icon={faCircleXmark}>{tAlert}</Message>}
+        {tAlert !== "" && (
+          <Message icon={faExclamationTriangle}>{tAlert}</Message>
+        )}
       </Row>
       <Row type="button">
         <Button

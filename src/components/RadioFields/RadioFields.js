@@ -9,7 +9,9 @@ import Field from "../Field";
 const RadioFields = (props) => {
   return (
     <StyledRadioFields>
-      <Label fieldName={props.fieldName}>{props.title}</Label>
+      <Label fieldName={props.fieldName}>
+        <p>{props.title}</p>
+      </Label>
       {props.options.map((option, index) => {
         return (
           <Row key={index} type="radio">

@@ -7,10 +7,10 @@ const StyledDropdown = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 30px;
+    font-weight: 400;
   }
   p:nth-child(2) {
     font-size: 1.2rem;
-    cursor: pointer;
   }
 `;
 

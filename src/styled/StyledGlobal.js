@@ -4,6 +4,7 @@ const StyledGlobal = createGlobalStyle`
 
     body {
         font-family: 'Poppins', sans-serif;
+        font-weight: 300;
     }
 `;
 
