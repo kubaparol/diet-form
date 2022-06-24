@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 
 import Row from "../Row";
 import RadioFields from "../RadioFields";
+import Button from "../Button";
 
-import { useChangeHandler } from "../../hooks";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const SecondStep = ({ data, getData }) => {
+import { useChangeHandler, useValidation } from "../../hooks";
+
+const SecondStep = ({ data, getData, clickHandler }) => {
+  const [stepData, setStepData] = useState(data);
+
   const { value: work, onChange: setWork } = useChangeHandler(data.work);
   const { value: activity, onChange: setActivity } = useChangeHandler(
     data.activity
@@ -20,7 +25,65 @@ const SecondStep = ({ data, getData }) => {
     data.suplements
   );
 
-  const [stepData, setStepData] = useState(data);
+  const { alert: workAlert, displayMessage: setWorkAlert } = useValidation();
+  const { alert: activityAlert, displayMessage: setActivityAlert } =
+    useValidation();
+  const { alert: dietHelpAlert, displayMessage: setdietHelpAlert } =
+    useValidation();
+  const { alert: diseasesAlert, displayMessage: setDiseasesAlert } =
+    useValidation();
+  const { alert: suplementsAlert, displayMessage: setsuplementsAlert } =
+    useValidation();
+
+  const displayAlert = (setStateFn, message) => {
+    setStateFn(message);
+  };
+
+  const validate = (e) => {
+    e.preventDefault();
+
+    const rules = [
+      {
+        name: work,
+        minLength: 1,
+        message: "Musisz zaznaczyć",
+        setStateFn: setWorkAlert,
+      },
+      {
+        name: activity,
+        minLength: 1,
+        message: "Musisz zaznaczyć",
+        setStateFn: setActivityAlert,
+      },
+      {
+        name: dietHelp,
+        minLength: 1,
+        message: "Musisz zaznaczyć",
+        setStateFn: setdietHelpAlert,
+      },
+      {
+        name: diseases,
+        minLength: 1,
+        message: "Musisz zaznaczyć",
+        setStateFn: setDiseasesAlert,
+      },
+      {
+        name: suplements,
+        minLength: 1,
+        message: "Musisz zaznaczyć",
+        setStateFn: setsuplementsAlert,
+      },
+    ];
+
+    rules.forEach((rule) => {
+      const { name, minLength, setStateFn, message } = rule;
+      if (name.length < minLength) {
+        displayAlert(setStateFn, message);
+      } else displayAlert(setStateFn, "");
+    });
+
+    if (work && activity && dietHelp && diseases && suplements) clickHandler(e);
+  };
 
   useEffect(() => {
     getData(stepData);
@@ -61,6 +124,7 @@ const SecondStep = ({ data, getData }) => {
           options={workOptions}
           value={data.work}
         />
+        <p>{workAlert}</p>
       </Row>
       <Row>
         <RadioFields
@@ -69,6 +133,7 @@ const SecondStep = ({ data, getData }) => {
           options={activityOptions}
           value={data.activity}
         />
+        <p>{activityAlert}</p>
       </Row>
       <Row>
         <RadioFields
@@ -77,6 +142,7 @@ const SecondStep = ({ data, getData }) => {
           options={dietHelpOptions}
           value={data.dietHelp}
         />
+        <p>{dietHelpAlert}</p>
       </Row>
       <Row>
         <RadioFields
@@ -85,6 +151,7 @@ const SecondStep = ({ data, getData }) => {
           options={diseasesOptions}
           value={data.diseases}
         />
+        <p>{diseasesAlert}</p>
       </Row>
       <Row>
         <RadioFields
@@ -93,6 +160,11 @@ const SecondStep = ({ data, getData }) => {
           options={suplementsOptions}
           value={data.suplements}
         />
+        <p>{suplementsAlert}</p>
+      </Row>
+      <Row type="button">
+        <Button onClick={clickHandler} icon={faArrowLeft} id="prev" />
+        <Button onClick={validate} icon={faArrowRight} id="next" />
       </Row>
     </>
   );

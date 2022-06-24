@@ -3,9 +3,14 @@ import React, { useState, useEffect } from "react";
 import Row from "../Row";
 import RadioFields from "../RadioFields";
 
-import { useChangeHandler } from "../../hooks";
+import Button from "../Button";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const FourthStep = ({ data, getData }) => {
+import { useChangeHandler, useValidation } from "../../hooks";
+
+const FourthStep = ({ data, getData, clickHandler }) => {
+  const [stepData, setStepData] = useState(data);
+
   const { value: quantityMeals, onChange: setQuantityMeals } = useChangeHandler(
     data.quantityMeals
   );
@@ -14,7 +19,49 @@ const FourthStep = ({ data, getData }) => {
   );
   const { value: money, onChange: setMoney } = useChangeHandler(data.money);
 
-  const [stepData, setStepData] = useState(data);
+  const { alert: quantityMealsAlert, displayMessage: setQuantityMealsAlert } =
+    useValidation();
+  const { alert: typeMealsAlert, displayMessage: setTypeMealsAlert } =
+    useValidation();
+  const { alert: moneyAlert, displayMessage: setMoneyAlert } = useValidation();
+
+  const displayAlert = (setStateFn, message) => {
+    setStateFn(message);
+  };
+
+  const validate = (e) => {
+    e.preventDefault();
+
+    const rules = [
+      {
+        name: quantityMeals,
+        minLength: 1,
+        message: "Musisz zaznaczyć",
+        setStateFn: setQuantityMealsAlert,
+      },
+      {
+        name: typeMeals,
+        minLength: 1,
+        message: "Musisz zaznaczyć",
+        setStateFn: setTypeMealsAlert,
+      },
+      {
+        name: money,
+        minLength: 1,
+        message: "Musisz zaznaczyć",
+        setStateFn: setMoneyAlert,
+      },
+    ];
+
+    rules.forEach((rule) => {
+      const { name, minLength, setStateFn, message } = rule;
+      if (name.length < minLength) {
+        displayAlert(setStateFn, message);
+      } else displayAlert(setStateFn, "");
+    });
+
+    if (quantityMeals && typeMeals && money) clickHandler(e);
+  };
 
   useEffect(() => {
     getData(stepData);
@@ -52,6 +99,7 @@ const FourthStep = ({ data, getData }) => {
           options={quantityMealsOptions}
           value={quantityMeals}
         />
+        <p>{quantityMealsAlert}</p>
       </Row>
       <Row>
         <RadioFields
@@ -60,6 +108,7 @@ const FourthStep = ({ data, getData }) => {
           options={typeMealsOptions}
           value={typeMeals}
         />
+        <p>{typeMealsAlert}</p>
       </Row>
       <Row>
         <RadioFields
@@ -68,6 +117,11 @@ const FourthStep = ({ data, getData }) => {
           options={moneyOptions}
           value={money}
         />
+        <p>{moneyAlert}</p>
+      </Row>
+      <Row type="button">
+        <Button onClick={clickHandler} icon={faArrowLeft} id="prev" />
+        <Button onClick={validate} icon={faArrowRight} id="next" />
       </Row>
     </>
   );

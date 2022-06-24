@@ -9,6 +9,7 @@ const StyledDropdown = styled.div`
   }
   p:nth-child(2) {
     font-size: 1.2rem;
+    cursor: pointer;
   }
 `;
 

@@ -6,7 +6,7 @@ const StyledFormPanel = styled.section`
   border-radius: 12px;
   box-shadow: 2px 2px 1px #cecece, -2px -2px 1px #ffffff;
   border-radius: 25px;
-  height: 85vh;
+  height: 100vh;
   overflow-y: scroll;
 
   ::-webkit-scrollbar {

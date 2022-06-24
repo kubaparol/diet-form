@@ -2,86 +2,47 @@ import React, { useState } from "react";
 
 import StyledFormPanel from "./FormPanel.styled";
 
-import {
-  faArrowLeft,
-  faArrowRight,
-  faPaperPlane,
-} from "@fortawesome/free-solid-svg-icons";
-
-import Modal from "../Modal";
-import Row from "../Row";
-import Button from "../Button";
 import FirstStep from "../FormSteps/FirstStep";
 import SecondStep from "../FormSteps/SecondStep";
 import ThirdStep from "../FormSteps/ThirdStep";
 import FourthStep from "../FormSteps/FourthStep";
+import FiveStep from "../FormSteps/FiveStep";
 
 const FormPanel = () => {
   const [step, setStep] = useState(0);
   const [data, setData] = useState({});
-  const [openModal, setOpenModal] = useState(false);
 
-  const steps = [FirstStep, SecondStep, ThirdStep, FourthStep];
+  const steps = [FirstStep, SecondStep, ThirdStep, FourthStep, FiveStep];
   const CurrentStep = steps[step];
 
   const clickHandler = (e) => {
     const button = e.currentTarget.id;
+    e.preventDefault();
     if (button === "prev" && step >= 1) {
       setStep(step - 1);
     } else if (button === "next" && step < steps.length - 1) {
       setStep(step + 1);
     } else return null;
+    console.log(data);
   };
 
   const getData = (newData) => {
     setData({ ...data, ...newData });
   };
 
-  const sendHandler = () => {
-    const errors = [];
-    for (const key in data) {
-      if (data[key].length === 0) errors.push("error");
-    }
-    if (errors !== 0) setOpenModal(true);
-  };
-
-  const AlertModal = () => {
-    return (
-      <Modal
-        setState={setOpenModal}
-        text="Uzupełnij wszystkie dane!"
-        type="alert"
-      />
-    );
-  };
-
-  // console.log(data);
-
   return (
     <>
       <StyledFormPanel>
-        <form>{<CurrentStep data={data} getData={getData} />}</form>
+        <form>
+          {
+            <CurrentStep
+              data={data}
+              getData={getData}
+              clickHandler={clickHandler}
+            />
+          }
+        </form>
       </StyledFormPanel>
-      <Row type="button">
-        <Button
-          onClick={clickHandler}
-          icon={faArrowLeft}
-          id="prev"
-          style={step === 0 ? { opacity: "0.2" } : null}
-        />
-        {step === steps.length - 1 ? (
-          <Button onClick={sendHandler} icon={faPaperPlane} id="send">
-            Prześlij
-          </Button>
-        ) : null}
-        <Button
-          onClick={clickHandler}
-          icon={faArrowRight}
-          id="next"
-          style={step === steps.length - 1 ? { opacity: "0.2" } : null}
-        />
-      </Row>
-      {openModal && <AlertModal />}
     </>
   );
 };
