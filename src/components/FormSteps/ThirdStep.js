@@ -3,9 +3,14 @@ import React, { useState, useEffect } from "react";
 import Row from "../Row";
 import RadioFields from "../RadioFields";
 import AddAnswerField from "../AddAnswerField";
+import Message from "../Message";
 
 import Button from "../Button";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faCircleXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { useChangeHandler, useValidation } from "../../hooks";
 
@@ -184,7 +189,9 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           options={meatOptions}
           value={meat}
         />
-        <p>{meatAlert}</p>
+        {meatAlert !== "" && (
+          <Message icon={faCircleXmark}>{meatAlert}</Message>
+        )}
       </Row>
       <Row>
         <RadioFields
@@ -193,7 +200,9 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           options={dairyOptions}
           value={dairy}
         />
-        <p>{dairyAlert}</p>
+        {dairyAlert !== "" && (
+          <Message icon={faCircleXmark}>{dairyAlert}</Message>
+        )}
       </Row>
       <Row>
         <RadioFields
@@ -202,7 +211,9 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           options={drinkOptions}
           value={drink}
         />
-        <p>{drinkAlert}</p>
+        {drinkAlert !== "" && (
+          <Message icon={faCircleXmark}>{drinkAlert}</Message>
+        )}
       </Row>
       <Row>
         <AddAnswerField
@@ -212,7 +223,9 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           value={data.likedProducts}
           setAlert={setLikedProductsAlert}
         />
-        <p>{likedProductsAlert}</p>
+        {likedProductsAlert !== "" && (
+          <Message icon={faCircleXmark}>{likedProductsAlert}</Message>
+        )}
       </Row>
       <Row>
         <AddAnswerField
@@ -222,7 +235,9 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           value={data.dislikedProducts}
           setAlert={setDislikedProductsAlert}
         />
-        <p>{dislikedProductsAlert}</p>
+        {dislikedProductsAlert !== "" && (
+          <Message icon={faCircleXmark}>{dislikedProductsAlert}</Message>
+        )}
       </Row>
       <Row>
         <AddAnswerField
@@ -232,7 +247,9 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           value={data.likedVegetables}
           setAlert={setLikedVegetablesAlert}
         />
-        <p>{likedVegetablesAlert}</p>
+        {likedVegetablesAlert !== "" && (
+          <Message icon={faCircleXmark}>{likedVegetablesAlert}</Message>
+        )}
       </Row>
       <Row>
         <AddAnswerField
@@ -242,7 +259,9 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           value={data.dislikedVegetables}
           setAlert={setDislikedVegetablesAlert}
         />
-        <p>{dislikedVegetablesAlert}</p>
+        {dislikedVegetablesAlert !== "" && (
+          <Message icon={faCircleXmark}>{dislikedVegetablesAlert}</Message>
+        )}
       </Row>
       <Row>
         <AddAnswerField
@@ -252,7 +271,9 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           value={data.likedFruits}
           setAlert={setLikedFruitsAlert}
         />
-        <p>{likedFruitsAlert}</p>
+        {likedFruitsAlert !== "" && (
+          <Message icon={faCircleXmark}>{likedFruitsAlert}</Message>
+        )}
       </Row>
       <Row>
         <AddAnswerField
@@ -262,7 +283,9 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
           value={data.dislikedFruits}
           setAlert={setDislikedFruitsAlert}
         />
-        <p>{dislikedFruitsAlert}</p>
+        {dislikedFruitsAlert !== "" && (
+          <Message icon={faCircleXmark}>{dislikedFruitsAlert}</Message>
+        )}
       </Row>
       <Row type="button">
         <Button onClick={clickHandler} icon={faArrowLeft} id="prev" />

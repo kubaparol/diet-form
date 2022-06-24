@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import Row from "../Row";
 import RadioFields from "../RadioFields";
+import Message from "../Message";
 
 import Button from "../Button";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faCircleXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { useChangeHandler, useValidation } from "../../hooks";
 
@@ -99,7 +104,9 @@ const FourthStep = ({ data, getData, clickHandler }) => {
           options={quantityMealsOptions}
           value={quantityMeals}
         />
-        <p>{quantityMealsAlert}</p>
+        {quantityMealsAlert !== "" && (
+          <Message icon={faCircleXmark}>{quantityMealsAlert}</Message>
+        )}
       </Row>
       <Row>
         <RadioFields
@@ -108,7 +115,9 @@ const FourthStep = ({ data, getData, clickHandler }) => {
           options={typeMealsOptions}
           value={typeMeals}
         />
-        <p>{typeMealsAlert}</p>
+        {typeMealsAlert !== "" && (
+          <Message icon={faCircleXmark}>{typeMealsAlert}</Message>
+        )}
       </Row>
       <Row>
         <RadioFields
@@ -117,7 +126,9 @@ const FourthStep = ({ data, getData, clickHandler }) => {
           options={moneyOptions}
           value={money}
         />
-        <p>{moneyAlert}</p>
+        {moneyAlert !== "" && (
+          <Message icon={faCircleXmark}>{moneyAlert}</Message>
+        )}
       </Row>
       <Row type="button">
         <Button onClick={clickHandler} icon={faArrowLeft} id="prev" />

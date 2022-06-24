@@ -3,8 +3,13 @@ import React, { useState, useEffect } from "react";
 import Row from "../Row";
 import RadioFields from "../RadioFields";
 import Button from "../Button";
+import Message from "../Message";
 
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faCircleXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { useChangeHandler, useValidation } from "../../hooks";
 
@@ -124,7 +129,9 @@ const SecondStep = ({ data, getData, clickHandler }) => {
           options={workOptions}
           value={data.work}
         />
-        <p>{workAlert}</p>
+        {workAlert !== "" && (
+          <Message icon={faCircleXmark}>{workAlert}</Message>
+        )}
       </Row>
       <Row>
         <RadioFields
@@ -133,7 +140,9 @@ const SecondStep = ({ data, getData, clickHandler }) => {
           options={activityOptions}
           value={data.activity}
         />
-        <p>{activityAlert}</p>
+        {activityAlert !== "" && (
+          <Message icon={faCircleXmark}>{activityAlert}</Message>
+        )}
       </Row>
       <Row>
         <RadioFields
@@ -142,7 +151,9 @@ const SecondStep = ({ data, getData, clickHandler }) => {
           options={dietHelpOptions}
           value={data.dietHelp}
         />
-        <p>{dietHelpAlert}</p>
+        {dietHelpAlert !== "" && (
+          <Message icon={faCircleXmark}>{dietHelpAlert}</Message>
+        )}
       </Row>
       <Row>
         <RadioFields
@@ -151,7 +162,9 @@ const SecondStep = ({ data, getData, clickHandler }) => {
           options={diseasesOptions}
           value={data.diseases}
         />
-        <p>{diseasesAlert}</p>
+        {diseasesAlert !== "" && (
+          <Message icon={faCircleXmark}>{diseasesAlert}</Message>
+        )}
       </Row>
       <Row>
         <RadioFields
@@ -160,7 +173,9 @@ const SecondStep = ({ data, getData, clickHandler }) => {
           options={suplementsOptions}
           value={data.suplements}
         />
-        <p>{suplementsAlert}</p>
+        {suplementsAlert !== "" && (
+          <Message icon={faCircleXmark}>{suplementsAlert}</Message>
+        )}
       </Row>
       <Row type="button">
         <Button onClick={clickHandler} icon={faArrowLeft} id="prev" />

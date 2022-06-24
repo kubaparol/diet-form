@@ -5,9 +5,14 @@ import Label from "../Label";
 import Field from "../Field";
 import Dropdown from "../Dropdown";
 import RadioFields from "../RadioFields";
-
 import Button from "../Button";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import Message from "../Message";
+
+import {
+  faArrowLeft,
+  faArrowRight,
+  faCircleXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { useChangeHandler, useValidation } from "../../hooks";
 
@@ -179,7 +184,7 @@ const FirstStep = ({ data, getData, clickHandler }) => {
               : () => setFNAlert("")
           }
         />
-        <p>{fNAlert}</p>
+        {fNAlert !== "" && <Message icon={faCircleXmark}>{fNAlert}</Message>}
       </Row>
       <Row>
         <Label fieldName="lastName">Nazwisko</Label>
@@ -193,7 +198,7 @@ const FirstStep = ({ data, getData, clickHandler }) => {
               : () => setLNAlert("")
           }
         />
-        <p>{lNAlert}</p>
+        {lNAlert !== "" && <Message icon={faCircleXmark}>{lNAlert}</Message>}
       </Row>
       <Row>
         <Label fieldName="height">Wzrost</Label>
@@ -208,7 +213,7 @@ const FirstStep = ({ data, getData, clickHandler }) => {
               : () => setHAlert("")
           }
         />
-        <p>{hAlert}</p>
+        {hAlert !== "" && <Message icon={faCircleXmark}>{hAlert}</Message>}
       </Row>
       <Row>
         <Label fieldName="waga">Waga</Label>
@@ -223,7 +228,7 @@ const FirstStep = ({ data, getData, clickHandler }) => {
               : () => setWAlert("")
           }
         />
-        <p>{wAlert}</p>
+        {wAlert !== "" && <Message icon={faCircleXmark}>{wAlert}</Message>}
       </Row>
       <Row>
         <Dropdown title="Pomiary ciała" options={dropdownOptions} />
@@ -235,7 +240,7 @@ const FirstStep = ({ data, getData, clickHandler }) => {
           options={targetOptions}
           value={data.target}
         />
-        <p>{tAlert}</p>
+        {tAlert !== "" && <Message icon={faCircleXmark}>{tAlert}</Message>}
       </Row>
       <Row type="button">
         <Button onClick={clickHandler} icon={faArrowLeft} id="prev" />
