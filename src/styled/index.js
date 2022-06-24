@@ -1,3 +1,4 @@
 import StyledNormalize from "./StyledNormalize";
+import StyledGlobal from "./StyledGlobal";
 
-export default StyledNormalize;
+export { StyledNormalize, StyledGlobal };

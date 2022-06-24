@@ -7,7 +7,11 @@ import StyledMessage from "./Message.styled";
 const Message = (props) => {
   return (
     <StyledMessage {...props}>
-      {props.icon ? <FontAwesomeIcon icon={props.icon} /> : null}{" "}
+      {props.icon ? (
+        <i>
+          <FontAwesomeIcon icon={props.icon} />
+        </i>
+      ) : null}{" "}
       {props.children}
     </StyledMessage>
   );

@@ -243,7 +243,12 @@ const FirstStep = ({ data, getData, clickHandler }) => {
         {tAlert !== "" && <Message icon={faCircleXmark}>{tAlert}</Message>}
       </Row>
       <Row type="button">
-        <Button onClick={clickHandler} icon={faArrowLeft} id="prev" />
+        <Button
+          onClick={clickHandler}
+          icon={faArrowLeft}
+          id="prev"
+          style={{ opacity: "0.2" }}
+        />
         <Button onClick={validate} icon={faArrowRight} id="next" />
       </Row>
     </>

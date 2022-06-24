@@ -15,13 +15,13 @@ const Dropdown = (props) => {
   return (
     <StyledDropdown>
       <header>
-        <span>{props.title}</span>
-        <span>
+        <p>{props.title}</p>
+        <p>
           <FontAwesomeIcon
             onClick={open ? () => setOpen(false) : () => setOpen(true)}
             icon={open ? faAngleDown : faAngleRight}
           />
-        </span>
+        </p>
       </header>
       {open
         ? props.options.map((option, index) => {
