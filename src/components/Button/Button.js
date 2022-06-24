@@ -7,8 +7,8 @@ import StyledButton from "./Button.styled";
 const Button = (props) => {
   return (
     <StyledButton {...props}>
+      {props.icon ? <FontAwesomeIcon icon={props.icon} /> : null}{" "}
       {props.children}
-      {props.icon ? <FontAwesomeIcon icon={props.icon} /> : null}
     </StyledButton>
   );
 };

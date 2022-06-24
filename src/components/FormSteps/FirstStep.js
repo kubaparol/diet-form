@@ -19,13 +19,11 @@ const FirstStep = ({ data, getData }) => {
   );
   const { value: height, onChange: setHeight } = useChangeHandler(data.height);
   const { value: weight, onChange: setWeight } = useChangeHandler(data.weight);
-
   const { value: biceps, onChange: setBiceps } = useChangeHandler(data.biceps);
   const { value: belly, onChange: setBelly } = useChangeHandler(data.belly);
   const { value: hips, onChange: setHips } = useChangeHandler(data.hips);
   const { value: thigh, onChange: setThigh } = useChangeHandler(data.thigh);
   const { value: calf, onChange: setCalf } = useChangeHandler(data.calf);
-
   const { value: target, onChange: setTarget } = useChangeHandler(data.target);
 
   useEffect(() => {

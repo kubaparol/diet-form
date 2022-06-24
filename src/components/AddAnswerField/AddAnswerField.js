@@ -17,7 +17,7 @@ const AddAnswerField = (props) => {
     onChange: setAnswer,
     clear: clearAnswer,
   } = useChangeHandler();
-  const [items, setItems] = useState(props.value || []);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     props.getItems(items);

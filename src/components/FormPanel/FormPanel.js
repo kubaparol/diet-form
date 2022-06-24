@@ -2,8 +2,13 @@ import React, { useState } from "react";
 
 import StyledFormPanel from "./FormPanel.styled";
 
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faPaperPlane,
+} from "@fortawesome/free-solid-svg-icons";
 
+import Modal from "../Modal";
 import Row from "../Row";
 import Button from "../Button";
 import FirstStep from "../FormSteps/FirstStep";
@@ -14,6 +19,7 @@ import FourthStep from "../FormSteps/FourthStep";
 const FormPanel = () => {
   const [step, setStep] = useState(0);
   const [data, setData] = useState({});
+  const [openModal, setOpenModal] = useState(false);
 
   const steps = [FirstStep, SecondStep, ThirdStep, FourthStep];
   const CurrentStep = steps[step];
@@ -31,7 +37,25 @@ const FormPanel = () => {
     setData({ ...data, ...newData });
   };
 
-  console.log(data);
+  const sendHandler = () => {
+    const errors = [];
+    for (const key in data) {
+      if (data[key].length === 0) errors.push("error");
+    }
+    if (errors !== 0) setOpenModal(true);
+  };
+
+  const AlertModal = () => {
+    return (
+      <Modal
+        setState={setOpenModal}
+        text="Uzupełnij wszystkie dane!"
+        type="alert"
+      />
+    );
+  };
+
+  // console.log(data);
 
   return (
     <>
@@ -45,6 +69,11 @@ const FormPanel = () => {
           id="prev"
           style={step === 0 ? { opacity: "0.2" } : null}
         />
+        {step === steps.length - 1 ? (
+          <Button onClick={sendHandler} icon={faPaperPlane} id="send">
+            Prześlij
+          </Button>
+        ) : null}
         <Button
           onClick={clickHandler}
           icon={faArrowRight}
@@ -52,6 +81,7 @@ const FormPanel = () => {
           style={step === steps.length - 1 ? { opacity: "0.2" } : null}
         />
       </Row>
+      {openModal && <AlertModal />}
     </>
   );
 };
