@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export const useChangeHandler = () => {
-  const [value, setValue] = useState("");
+export const useChangeHandler = (defaultState = "") => {
+  const [value, setValue] = useState(defaultState);
 
   return {
     value,

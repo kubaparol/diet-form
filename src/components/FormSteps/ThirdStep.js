@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Row from "../Row";
 import RadioFields from "../RadioFields";
@@ -6,10 +6,10 @@ import AddAnswerField from "../AddAnswerField";
 
 import { useChangeHandler } from "../../hooks";
 
-const ThirdStep = () => {
-  const { value: meat, onChange: setMeat } = useChangeHandler();
-  const { value: dairy, onChange: setDairy } = useChangeHandler();
-  const { value: drink, onChange: setDrink } = useChangeHandler();
+const ThirdStep = ({ data, getData }) => {
+  const { value: meat, onChange: setMeat } = useChangeHandler(data.meat);
+  const { value: dairy, onChange: setDairy } = useChangeHandler(data.dairy);
+  const { value: drink, onChange: setDrink } = useChangeHandler(data.drink);
 
   const [likedProducts, setLikedProducts] = useState([]);
   const [dislikedProducts, setDislikedProducts] = useState([]);
@@ -17,6 +17,36 @@ const ThirdStep = () => {
   const [dislikedVegetables, setDislikedVegetables] = useState([]);
   const [likedFruits, setLikedFruits] = useState([]);
   const [dislikedFruits, setDislikedFruits] = useState([]);
+
+  const [stepData, setStepData] = useState(data);
+
+  useEffect(() => {
+    getData(stepData);
+  }, [stepData]);
+
+  useEffect(() => {
+    setStepData({
+      meat,
+      dairy,
+      drink,
+      likedProducts,
+      dislikedProducts,
+      likedVegetables,
+      dislikedVegetables,
+      likedFruits,
+      dislikedFruits,
+    });
+  }, [
+    meat,
+    dairy,
+    drink,
+    likedProducts,
+    dislikedProducts,
+    likedVegetables,
+    dislikedVegetables,
+    likedFruits,
+    dislikedFruits,
+  ]);
 
   const meatOptions = [
     { name: "Tak", value: "yes", onChange: setMeat },
@@ -41,6 +71,7 @@ const ThirdStep = () => {
           fieldName="meat"
           title="Czy jesz mięso i ryby?"
           options={meatOptions}
+          value={meat}
         />
       </Row>
       <Row>
@@ -48,6 +79,7 @@ const ThirdStep = () => {
           fieldName="dairy"
           title="Czy jesz nabiał?"
           options={dairyOptions}
+          value={dairy}
         />
       </Row>
       <Row>
@@ -55,6 +87,7 @@ const ThirdStep = () => {
           fieldName="drink"
           title="Co najczęściej pijesz?"
           options={drinkOptions}
+          value={drink}
         />
       </Row>
       <Row>
@@ -62,6 +95,7 @@ const ThirdStep = () => {
           fieldName="likedProducts"
           title="Jakie są Twoje ulubione produkty?"
           getItems={setLikedProducts}
+          value={data.likedProducts}
         />
       </Row>
       <Row>
@@ -69,6 +103,7 @@ const ThirdStep = () => {
           fieldName="dislikedProducts"
           title="Czego nie lubisz jeść?"
           getItems={setDislikedProducts}
+          value={data.dislikedProducts}
         />
       </Row>
       <Row>
@@ -76,6 +111,7 @@ const ThirdStep = () => {
           fieldName="likedVegetables"
           title="Jakie są Twoje ulubione warzywa?"
           getItems={setLikedVegetables}
+          value={data.likedVegetables}
         />
       </Row>
       <Row>
@@ -83,6 +119,7 @@ const ThirdStep = () => {
           fieldName="dislikedVegetables"
           title="Jakich warzyw nie lubisz?"
           getItems={setDislikedVegetables}
+          value={data.dislikedVegetables}
         />
       </Row>
       <Row>
@@ -90,6 +127,7 @@ const ThirdStep = () => {
           fieldName="likedFruits"
           title="Jakie są Twoje ulubione owoce?"
           getItems={setLikedFruits}
+          value={data.likedFruits}
         />
       </Row>
       <Row>
@@ -97,6 +135,7 @@ const ThirdStep = () => {
           fieldName="dislikedFruits"
           title="Jakich owoców nie lubisz?"
           getItems={setDislikedFruits}
+          value={data.dislikedFruits}
         />
       </Row>
     </>

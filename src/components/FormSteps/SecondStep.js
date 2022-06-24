@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import Row from "../Row";
 import RadioFields from "../RadioFields";
 
 import { useChangeHandler } from "../../hooks";
 
-const SecondStep = () => {
-  const { value: work, onChange: setWork } = useChangeHandler();
-  const { value: activity, onChange: setActivity } = useChangeHandler();
-  const { value: dietHelp, onChange: setDietHelp } = useChangeHandler();
-  const { value: diseases, onChange: setDiseases } = useChangeHandler();
-  const { value: suplements, onChange: setSuplements } = useChangeHandler();
+const SecondStep = ({ data, getData }) => {
+  const { value: work, onChange: setWork } = useChangeHandler(data.work);
+  const { value: activity, onChange: setActivity } = useChangeHandler(
+    data.activity
+  );
+  const { value: dietHelp, onChange: setDietHelp } = useChangeHandler(
+    data.dietHelp
+  );
+  const { value: diseases, onChange: setDiseases } = useChangeHandler(
+    data.diseases
+  );
+  const { value: suplements, onChange: setSuplements } = useChangeHandler(
+    data.suplements
+  );
+
+  const [stepData, setStepData] = useState(data);
+
+  useEffect(() => {
+    getData(stepData);
+  }, [stepData]);
+
+  useEffect(() => {
+    setStepData({ work, activity, dietHelp, diseases, suplements });
+  }, [work, activity, dietHelp, diseases, suplements]);
 
   const workOptions = [
     { name: "Praca fizyczna", value: "physical", onChange: setWork },
@@ -41,6 +59,7 @@ const SecondStep = () => {
           fieldName="work"
           title="Jaki rodzaj pracy wykonujesz?"
           options={workOptions}
+          value={data.work}
         />
       </Row>
       <Row>
@@ -48,6 +67,7 @@ const SecondStep = () => {
           fieldName="acitvity"
           title="Jak określisz swój poziom aktywności?"
           options={activityOptions}
+          value={data.activity}
         />
       </Row>
       <Row>
@@ -55,6 +75,7 @@ const SecondStep = () => {
           fieldName="dietHelp"
           title="Czy korzystałeś kiedyś z pomocy dietetyka?"
           options={dietHelpOptions}
+          value={data.dietHelp}
         />
       </Row>
       <Row>
@@ -62,6 +83,7 @@ const SecondStep = () => {
           fieldName="diseases"
           title="Czy chorujesz na coś?"
           options={diseasesOptions}
+          value={data.diseases}
         />
       </Row>
       <Row>
@@ -69,6 +91,7 @@ const SecondStep = () => {
           fieldName="suplements"
           title="Czy stosujesz jakąś suplementację?"
           options={suplementsOptions}
+          value={data.suplements}
         />
       </Row>
     </>

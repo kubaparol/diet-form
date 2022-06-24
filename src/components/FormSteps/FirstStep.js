@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Row from "../Row";
 import Label from "../Label";
@@ -8,19 +8,55 @@ import RadioFields from "../RadioFields";
 
 import { useChangeHandler } from "../../hooks";
 
-const FirstStep = () => {
-  const { value: firstName, onChange: setFirstName } = useChangeHandler();
-  const { value: lastName, onChange: setLastName } = useChangeHandler();
-  const { value: height, onChange: setHeight } = useChangeHandler();
-  const { value: weight, onChange: setWeight } = useChangeHandler();
+const FirstStep = ({ data, getData }) => {
+  const [stepData, setStepData] = useState(data);
 
-  const { value: biceps, onChange: setBiceps } = useChangeHandler();
-  const { value: belly, onChange: setBelly } = useChangeHandler();
-  const { value: hips, onChange: setHips } = useChangeHandler();
-  const { value: thigh, onChange: setThigh } = useChangeHandler();
-  const { value: calf, onChange: setCalf } = useChangeHandler();
+  const { value: firstName, onChange: setFirstName } = useChangeHandler(
+    data.firstName
+  );
+  const { value: lastName, onChange: setLastName } = useChangeHandler(
+    data.lastName
+  );
+  const { value: height, onChange: setHeight } = useChangeHandler(data.height);
+  const { value: weight, onChange: setWeight } = useChangeHandler(data.weight);
 
-  const { value: target, onChange: setTarget } = useChangeHandler();
+  const { value: biceps, onChange: setBiceps } = useChangeHandler(data.biceps);
+  const { value: belly, onChange: setBelly } = useChangeHandler(data.belly);
+  const { value: hips, onChange: setHips } = useChangeHandler(data.hips);
+  const { value: thigh, onChange: setThigh } = useChangeHandler(data.thigh);
+  const { value: calf, onChange: setCalf } = useChangeHandler(data.calf);
+
+  const { value: target, onChange: setTarget } = useChangeHandler(data.target);
+
+  useEffect(() => {
+    getData(stepData);
+  }, [stepData]);
+
+  useEffect(() => {
+    setStepData({
+      firstName,
+      lastName,
+      height,
+      weight,
+      biceps,
+      belly,
+      hips,
+      thigh,
+      calf,
+      target,
+    });
+  }, [
+    firstName,
+    lastName,
+    height,
+    weight,
+    biceps,
+    belly,
+    hips,
+    thigh,
+    calf,
+    target,
+  ]);
 
   const dropdownOptions = [
     {
@@ -96,6 +132,7 @@ const FirstStep = () => {
           fieldName="target"
           title="Jaki jest Twój cel?"
           options={targetOptions}
+          value={data.target}
         />
       </Row>
     </>

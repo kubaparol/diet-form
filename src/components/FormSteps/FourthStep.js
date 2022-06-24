@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import Row from "../Row";
 import RadioFields from "../RadioFields";
 
 import { useChangeHandler } from "../../hooks";
 
-const FourthStep = () => {
-  const { value: quantitymeals, onChange: setQuantityMeals } =
-    useChangeHandler();
-  const { value: typeMeals, onChange: setTypeMeals } = useChangeHandler();
-  const { value: money, onChange: setMoney } = useChangeHandler();
+const FourthStep = ({ data, getData }) => {
+  const { value: quantityMeals, onChange: setQuantityMeals } = useChangeHandler(
+    data.quantityMeals
+  );
+  const { value: typeMeals, onChange: setTypeMeals } = useChangeHandler(
+    data.typeMeals
+  );
+  const { value: money, onChange: setMoney } = useChangeHandler(data.money);
+
+  const [stepData, setStepData] = useState(data);
+
+  useEffect(() => {
+    getData(stepData);
+  }, [stepData]);
+
+  useEffect(() => {
+    setStepData({ quantityMeals, typeMeals, money });
+  }, [quantityMeals, typeMeals, money]);
 
   const quantityMealsOptions = [
     { name: "Od 2 do 3", value: "2-3", onChange: setQuantityMeals },
@@ -37,6 +50,7 @@ const FourthStep = () => {
           fieldName="quantityMeals"
           title="Ile posiłów chcesz jeść w ciągu dnia?"
           options={quantityMealsOptions}
+          value={quantityMeals}
         />
       </Row>
       <Row>
@@ -44,6 +58,7 @@ const FourthStep = () => {
           fieldName="typeMeals"
           title="Jakie powinny być Twoje posiłki?"
           options={typeMealsOptions}
+          value={typeMeals}
         />
       </Row>
       <Row>
@@ -51,6 +66,7 @@ const FourthStep = () => {
           fieldName="money"
           title="Ile chcesz wydawać tygodniowo na jedzenie?"
           options={moneyOptions}
+          value={money}
         />
       </Row>
     </>

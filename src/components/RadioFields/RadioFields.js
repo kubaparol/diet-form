@@ -19,6 +19,7 @@ const RadioFields = (props) => {
               name={props.fieldName}
               value={option.value}
               onChange={option.onChange}
+              checked={props.value === option.value ? true : false}
             />
           </Row>
         );

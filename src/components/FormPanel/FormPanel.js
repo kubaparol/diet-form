@@ -12,39 +12,44 @@ import ThirdStep from "../FormSteps/ThirdStep";
 import FourthStep from "../FormSteps/FourthStep";
 
 const FormPanel = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
+  const [data, setData] = useState({});
+
+  const steps = [FirstStep, SecondStep, ThirdStep, FourthStep];
+  const CurrentStep = steps[step];
 
   const clickHandler = (e) => {
     const button = e.currentTarget.id;
-    if (button === "prev" && step > 1) {
+    if (button === "prev" && step >= 1) {
       setStep(step - 1);
-    } else if (button === "next" && step < 4) {
+    } else if (button === "next" && step < steps.length - 1) {
       setStep(step + 1);
     } else return null;
   };
 
+  const getData = (newData) => {
+    setData({ ...data, ...newData });
+  };
+
+  console.log(data);
+
   return (
     <>
       <StyledFormPanel>
-        <form>
-          {step === 1 && <FirstStep />}
-          {step === 2 && <SecondStep />}
-          {step === 3 && <ThirdStep />}
-          {step === 4 && <FourthStep />}
-        </form>
+        <form>{<CurrentStep data={data} getData={getData} />}</form>
       </StyledFormPanel>
       <Row type="button">
         <Button
           onClick={clickHandler}
           icon={faArrowLeft}
           id="prev"
-          style={step === 1 ? { opacity: "0.2" } : null}
+          style={step === 0 ? { opacity: "0.2" } : null}
         />
         <Button
           onClick={clickHandler}
           icon={faArrowRight}
           id="next"
-          style={step === 4 ? { opacity: "0.2" } : null}
+          style={step === steps.length - 1 ? { opacity: "0.2" } : null}
         />
       </Row>
     </>
