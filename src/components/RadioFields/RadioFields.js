@@ -2,28 +2,29 @@ import React from "react";
 
 import StyledRadioFields from "./RadioFields.styled";
 
-import Row from "../Row";
 import Label from "../Label";
-import Field from "../Field";
 
 const RadioFields = (props) => {
   return (
     <StyledRadioFields>
-      <Label fieldName={props.fieldName}>
-        <p>{props.title}</p>
-      </Label>
+      <p>{props.title}</p>
       {props.options.map((option, index) => {
         return (
-          <Row key={index} type="radio">
+          <div key={index}>
             {option.name}
-            <Field
+            <input
               type="radio"
               name={props.fieldName}
+              id={`field-${props.fieldName}${index}`}
               value={option.value}
               onChange={option.onChange}
               checked={props.value === option.value ? true : false}
             />
-          </Row>
+            <Label
+              fieldName={props.fieldName + index}
+              onClick={option.onChange}
+            />
+          </div>
         );
       })}
     </StyledRadioFields>

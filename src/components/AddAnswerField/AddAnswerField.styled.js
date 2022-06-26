@@ -17,6 +17,9 @@ const StyledAddAnswerField = styled.div`
     align-items: center;
     margin-top: 10px;
   }
+  li {
+    overflow: hidden;
+  }
 `;
 
 export default StyledAddAnswerField;

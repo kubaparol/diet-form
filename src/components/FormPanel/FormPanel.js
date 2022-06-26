@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import StyledFormPanel from "./FormPanel.styled";
 
+import ProgressBar from "../ProgressBar";
 import FirstStep from "../FormSteps/FirstStep";
 import SecondStep from "../FormSteps/SecondStep";
 import ThirdStep from "../FormSteps/ThirdStep";
@@ -32,6 +33,9 @@ const FormPanel = () => {
 
   return (
     <>
+      {step !== steps.length - 1 ? (
+        <ProgressBar bgcolor="blue" completed={(step + 1) * 25} />
+      ) : null}
       <StyledFormPanel>
         <form>
           {
