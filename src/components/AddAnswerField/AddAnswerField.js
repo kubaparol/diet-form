@@ -43,7 +43,12 @@ const AddAnswerField = (props) => {
       <header>
         <Label fieldName={props.fieldName}>{props.title}</Label>
         <div>
-          <Field name={props.fieldName} value={answer} onChange={setAnswer} />
+          <Field
+            placeholder={props.placeholder}
+            name={props.fieldName}
+            value={answer}
+            onChange={setAnswer}
+          />
           <p onClick={clickHandler}>
             <FontAwesomeIcon icon={faPlus} />
           </p>

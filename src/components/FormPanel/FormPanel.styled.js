@@ -1,13 +1,7 @@
 import styled from "styled-components";
 
 const StyledFormPanel = styled.section`
-  padding: 20px;
-  background-color: #e8f0f9;
-  border-radius: 12px;
-  box-shadow: 2px 2px 1px #cecece, -2px -2px 1px #ffffff;
-  border-radius: 25px;
-  height: 100vh;
-  overflow-y: scroll;
+  padding: 10px;
 
   ::-webkit-scrollbar {
     display: none;

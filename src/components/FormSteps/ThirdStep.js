@@ -104,7 +104,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
       {
         name: likedFruits,
         minLength: 1,
-        message: "Dpdaj lubiane owoce",
+        message: "Dodaj lubiane owoce",
         setStateFn: setLikedFruitsAlert,
       },
       {
@@ -218,7 +218,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
       <Row>
         <AddAnswerField
           fieldName="likedProducts"
-          title="Jakie są Twoje ulubione produkty?"
+          placeholder="Jakie są Twoje ulubione produkty?"
           getItems={setLikedProducts}
           value={data.likedProducts}
           setAlert={setLikedProductsAlert}
@@ -230,19 +230,21 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
       <Row>
         <AddAnswerField
           fieldName="dislikedProducts"
-          title="Czego nie lubisz jeść?"
+          placeholder="Czego nie lubisz jeść?"
           getItems={setDislikedProducts}
           value={data.dislikedProducts}
           setAlert={setDislikedProductsAlert}
         />
         {dislikedProductsAlert !== "" && (
-          <Message icon={faExclamationTriangle}>{dislikedProductsAlert}</Message>
+          <Message icon={faExclamationTriangle}>
+            {dislikedProductsAlert}
+          </Message>
         )}
       </Row>
       <Row>
         <AddAnswerField
           fieldName="likedVegetables"
-          title="Jakie są Twoje ulubione warzywa?"
+          placeholder="Jakie są Twoje ulubione warzywa?"
           getItems={setLikedVegetables}
           value={data.likedVegetables}
           setAlert={setLikedVegetablesAlert}
@@ -254,19 +256,21 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
       <Row>
         <AddAnswerField
           fieldName="dislikedVegetables"
-          title="Jakich warzyw nie lubisz?"
+          placeholder="Jakich warzyw nie lubisz?"
           getItems={setDislikedVegetables}
           value={data.dislikedVegetables}
           setAlert={setDislikedVegetablesAlert}
         />
         {dislikedVegetablesAlert !== "" && (
-          <Message icon={faExclamationTriangle}>{dislikedVegetablesAlert}</Message>
+          <Message icon={faExclamationTriangle}>
+            {dislikedVegetablesAlert}
+          </Message>
         )}
       </Row>
       <Row>
         <AddAnswerField
           fieldName="likedFruits"
-          title="Jakie są Twoje ulubione owoce?"
+          placeholder="Jakie są Twoje ulubione owoce?"
           getItems={setLikedFruits}
           value={data.likedFruits}
           setAlert={setLikedFruitsAlert}
@@ -278,7 +282,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
       <Row>
         <AddAnswerField
           fieldName="dislikedFruits"
-          title="Jakich owoców nie lubisz?"
+          placeholder="Jakich owoców nie lubisz?"
           getItems={setDislikedFruits}
           value={data.dislikedFruits}
           setAlert={setDislikedFruitsAlert}

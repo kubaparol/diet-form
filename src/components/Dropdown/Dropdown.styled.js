@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
 const StyledDropdown = styled.div`
-  width: 100%;
+  border: 0;
+  font-size: 16px;
+  border-radius: 30px;
+  padding: 16px;
+  background-color: #ebecf0;
+  text-shadow: 1px 1px 0 #fff;
+  color: #61677c;
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
   header {
     display: flex;
     justify-content: space-between;

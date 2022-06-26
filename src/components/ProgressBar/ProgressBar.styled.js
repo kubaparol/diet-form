@@ -3,9 +3,9 @@ import styled from "styled-components";
 const StyledProgressBar = styled.div`
   height: 25px;
   width: 100%;
-  background-color: #e0e0de;
-  border-radius: 50px;
-  margin: 10px;
+  font-size: 16px;
+  border-radius: 30px;
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
   div {
     height: 100%;
     width: ${(props) => props.completed}%;
@@ -17,7 +17,6 @@ const StyledProgressBar = styled.div`
     transition: width 1s;
   }
   span {
-    padding: 5px;
     color: white;
   }
 `;

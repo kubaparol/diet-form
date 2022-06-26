@@ -10,7 +10,7 @@ import FourthStep from "../FormSteps/FourthStep";
 import FiveStep from "../FormSteps/FiveStep";
 
 const FormPanel = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
   const [data, setData] = useState({});
 
   const steps = [FirstStep, SecondStep, ThirdStep, FourthStep, FiveStep];
@@ -34,7 +34,7 @@ const FormPanel = () => {
   return (
     <>
       {step !== steps.length - 1 ? (
-        <ProgressBar bgcolor="blue" completed={(step + 1) * 25} />
+        <ProgressBar bgcolor="#ae1100" completed={(step + 1) * 25} />
       ) : null}
       <StyledFormPanel>
         <form>

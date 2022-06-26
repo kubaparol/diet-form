@@ -173,8 +173,9 @@ const FirstStep = ({ data, getData, clickHandler }) => {
   return (
     <>
       <Row>
-        <Label fieldName="firstName">Imię</Label>
+        <Label fieldName="firstName" />
         <Field
+          placeholder="Imię"
           name="firstName"
           value={firstName}
           onChange={setFirstName}
@@ -189,8 +190,9 @@ const FirstStep = ({ data, getData, clickHandler }) => {
         )}
       </Row>
       <Row>
-        <Label fieldName="lastName">Nazwisko</Label>
+        <Label fieldName="lastName" />
         <Field
+          placeholder="Nazwisko"
           name="lastName"
           value={lastName}
           onChange={setLastName}
@@ -205,8 +207,9 @@ const FirstStep = ({ data, getData, clickHandler }) => {
         )}
       </Row>
       <Row>
-        <Label fieldName="height">Wzrost</Label>
+        <Label fieldName="height" />
         <Field
+          placeholder="Wzrost"
           type="number"
           name="height"
           value={height}
@@ -222,8 +225,9 @@ const FirstStep = ({ data, getData, clickHandler }) => {
         )}
       </Row>
       <Row>
-        <Label fieldName="waga">Waga</Label>
+        <Label fieldName="waga" />
         <Field
+          placeholder="Waga"
           type="number"
           name="waga"
           value={weight}

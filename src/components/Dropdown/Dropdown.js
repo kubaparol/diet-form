@@ -27,8 +27,9 @@ const Dropdown = (props) => {
         ? props.options.map((option, index) => {
             return (
               <Row key={index}>
-                <Label fieldName={option.fieldName}>{option.name}</Label>
+                <Label fieldName={option.fieldName} />
                 <Field
+                  placeholder={option.name}
                   type={option.type ? option.type : option.fieldName}
                   name={option.fieldName}
                   value={option.value}
