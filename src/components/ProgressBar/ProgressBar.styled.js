@@ -26,6 +26,9 @@ const StyledProgressBar = styled.div`
   span {
     color: white;
   }
+  @media ${(props) => props.theme.media.tablet} {
+    max-width: 800px;
+  }
 `;
 
 export default StyledProgressBar;

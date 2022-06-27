@@ -27,7 +27,11 @@ const StyledButton = styled.button`
   ${(props) =>
     props.id2 === "send" &&
     css`
-      color: green;
+      color: ${(props) => props.theme.buttonSendColor};
+      background-color: ${(props) => props.theme.buttonSendBcg};
+      &:hover {
+        background-color: ${(props) => props.theme.buttonSendBcgHover};
+      }
     `}
   ${(props) =>
     props.id2 === "start" &&
@@ -36,6 +40,16 @@ const StyledButton = styled.button`
       text-shadow: none;
       color: ${(props) => props.theme.buttonStartColor};
     `}
+    @media ${(props) => props.theme.media.tablet} {
+    &:hover {
+      cursor: pointer;
+      ${(props) =>
+        props.id2 === "start" &&
+        css`
+          background-color: ${(props) => props.theme.buttonStartBcgHover};
+        `}
+    }
+  }
 `;
 
 export default StyledButton;

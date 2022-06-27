@@ -21,6 +21,11 @@ const StyledDropdown = styled.div`
     font-size: 1.4rem;
     padding-right: 10px;
   }
+  @media ${(props) => props.theme.media.tablet} {
+    p:nth-child(2) {
+      cursor: pointer;
+    }
+  }
 `;
 
 export default StyledDropdown;

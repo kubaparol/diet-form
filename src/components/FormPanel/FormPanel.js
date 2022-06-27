@@ -11,7 +11,7 @@ import FourthStep from "../FormSteps/FourthStep";
 import LastStep from "../FormSteps/LastStep";
 
 const FormPanel = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(4);
   const [data, setData] = useState({});
 
   const steps = [

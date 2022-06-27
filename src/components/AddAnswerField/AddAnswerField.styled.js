@@ -34,6 +34,19 @@ const StyledAddAnswerField = styled.div`
   }
   p {
     margin-right: 8px;
+    color: ${(props) => props.theme.fontColor};
+  }
+  @media ${(props) => props.theme.media.tablet} {
+    p {
+      cursor: pointer;
+    }
+    li {
+      transition: 0.1s;
+    }
+    li:hover {
+      background-color: #d7d9de;
+      text-shadow: none;
+    }
   }
 `;
 

@@ -70,6 +70,11 @@ const StyledRadioFields = styled.div`
       }
     }
   }
+  @media ${(props) => props.theme.media.tablet} {
+    label {
+      cursor: pointer;
+    }
+  }
 `;
 
 export default StyledRadioFields;

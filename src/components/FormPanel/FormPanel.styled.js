@@ -9,8 +9,8 @@ const StyledFormPanel = styled.section`
   -ms-overflow-style: none;
   scrollbar-width: none;
 
-  @media screen and (min-width: 1000px) {
-    max-width: 1000px;
+  @media ${(props) => props.theme.media.tablet} {
+    max-width: 800px;
     margin: 0 auto;
   }
 `;
