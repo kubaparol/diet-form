@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledFormPanel = styled.section`
-  padding: 10px;
+  padding-top: 30px;
 
   ::-webkit-scrollbar {
     display: none;
