@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -57,14 +58,19 @@ const AddAnswerField = (props) => {
       <ul>
         {items.map((item, index) => {
           return (
-            <li key={index}>
+            <motion.li
+              key={index}
+              initial={{ x: "100vw" }}
+              animate={{ x: 0 }}
+              transition={{ type: "spring" }}
+            >
               <Row type="answer">
                 <p onClick={() => deleteAnswer(index)}>
                   <FontAwesomeIcon icon={faXmark} />
                 </p>
                 {item}
               </Row>
-            </li>
+            </motion.li>
           );
         })}
       </ul>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 import Row from "../Row";
 import Label from "../Label";
@@ -171,7 +172,11 @@ const FirstStep = ({ data, getData, clickHandler }) => {
   ];
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.1 }}
+    >
       <Row>
         <Label fieldName="firstName" />
         <Field
@@ -265,7 +270,7 @@ const FirstStep = ({ data, getData, clickHandler }) => {
         />
         <Button onClick={validate} icon={faArrowRight} id="next" />
       </Row>
-    </>
+    </motion.div>
   );
 };
 

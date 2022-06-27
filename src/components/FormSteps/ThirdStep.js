@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 import Row from "../Row";
 import RadioFields from "../RadioFields";
@@ -181,7 +182,11 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
   ];
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.1 }}
+    >
       <Row>
         <RadioFields
           fieldName="meat"
@@ -295,7 +300,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
         <Button onClick={clickHandler} icon={faArrowLeft} id="prev" />
         <Button onClick={validate} icon={faArrowRight} id="next" />
       </Row>
-    </>
+    </motion.div>
   );
 };
 

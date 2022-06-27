@@ -16,8 +16,11 @@ const Dropdown = (props) => {
     <StyledDropdown>
       <header>
         <p>{props.title}</p>
-        <p onClick={open ? () => setOpen(false) : () => setOpen(true)}>
-          <FontAwesomeIcon icon={open ? faAngleDown : faAngleRight} />
+        <p>
+          <FontAwesomeIcon
+            onClick={open ? () => setOpen(false) : () => setOpen(true)}
+            icon={open ? faAngleDown : faAngleRight}
+          />
         </p>
       </header>
       {open
