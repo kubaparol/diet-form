@@ -121,7 +121,7 @@ const ThirdStep = ({ data, getData, clickHandler }) => {
         displayAlert(setStateFn, message);
       } else displayAlert(setStateFn, "");
     });
-    console.log(likedProducts.length);
+
     if (
       meat &&
       dairy &&

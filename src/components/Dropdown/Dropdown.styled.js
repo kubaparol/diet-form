@@ -6,9 +6,10 @@ const StyledDropdown = styled.div`
   border-radius: 30px;
   padding: 16px;
   background-color: #ebecf0;
-  text-shadow: 1px 1px 0 #fff;
-  color: #61677c;
-  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+  text-shadow: 1px 1px 0 ${(props) => props.theme.shadowFirstColor};
+  color: ${(props) => props.theme.fontColor};
+  box-shadow: -5px -5px 20px ${(props) => props.theme.shadowFirstColor},
+    5px 5px 20px ${(props) => props.theme.shadowSecondColor};
   header {
     display: flex;
     justify-content: space-between;
@@ -17,7 +18,8 @@ const StyledDropdown = styled.div`
     font-weight: 400;
   }
   p:nth-child(2) {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    padding-right: 10px;
   }
 `;
 

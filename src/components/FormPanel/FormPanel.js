@@ -3,17 +3,25 @@ import React, { useState } from "react";
 import StyledFormPanel from "./FormPanel.styled";
 
 import ProgressBar from "../ProgressBar";
+import StartStep from "../FormSteps/StartStep";
 import FirstStep from "../FormSteps/FirstStep";
 import SecondStep from "../FormSteps/SecondStep";
 import ThirdStep from "../FormSteps/ThirdStep";
 import FourthStep from "../FormSteps/FourthStep";
-import FiveStep from "../FormSteps/FiveStep";
+import LastStep from "../FormSteps/LastStep";
 
 const FormPanel = () => {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
   const [data, setData] = useState({});
 
-  const steps = [FirstStep, SecondStep, ThirdStep, FourthStep, FiveStep];
+  const steps = [
+    StartStep,
+    FirstStep,
+    SecondStep,
+    ThirdStep,
+    FourthStep,
+    LastStep,
+  ];
   const CurrentStep = steps[step];
 
   const clickHandler = (e) => {
@@ -33,8 +41,8 @@ const FormPanel = () => {
 
   return (
     <>
-      {step !== steps.length - 1 ? (
-        <ProgressBar bgcolor="#ae1100" completed={(step + 1) * 25} />
+      {step !== steps.length - 1 && step !== 0 ? (
+        <ProgressBar bgcolor="#ae1100" completed={step * 25} />
       ) : null}
       <StyledFormPanel>
         <form>

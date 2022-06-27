@@ -9,15 +9,17 @@ const StyledField = styled.input.attrs(({ name, type }) => ({
   font-size: 16px;
   border-radius: 30px;
   padding: 16px;
-  background-color: #ebecf0;
-  text-shadow: 1px 1px 0 #fff;
+  background-color: ${(props) => props.theme.elementBcg};
+  text-shadow: 1px 1px 0 ${(props) => props.theme.shadowFirstColor};
   margin-right: 8px;
-  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  box-shadow: inset 2px 2px 5px ${(props) => props.theme.shadowSecondColor},
+    inset -5px -5px 10px ${(props) => props.theme.shadowFirstColor};
   width: 100%;
   box-sizing: border-box;
   transition: all 0.2s ease-in-out;
   &:focus {
-    box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+    box-shadow: inset 1px 1px 2px ${(props) => props.theme.shadowSecondColor},
+      inset -1px -1px 2px ${(props) => props.theme.shadowFirstColor};
   }
   ${(props) =>
     props.type === "radio" &&

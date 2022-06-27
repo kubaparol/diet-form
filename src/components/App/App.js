@@ -1,6 +1,7 @@
 import React from "react";
 
-import { StyledNormalize, StyledGlobal } from "../../styled";
+import { ThemeProvider } from "styled-components";
+import { StyledNormalize, StyledGlobal, themeSettings } from "../../styled";
 import StyledApp from "./App.styled";
 
 import FormPanel from "../FormPanel";
@@ -10,9 +11,11 @@ const App = () => {
     <>
       <StyledNormalize />
       <StyledGlobal />
-      <StyledApp>
-        <FormPanel />
-      </StyledApp>
+      <ThemeProvider theme={themeSettings}>
+        <StyledApp>
+          <FormPanel />
+        </StyledApp>
+      </ThemeProvider>
     </>
   );
 };

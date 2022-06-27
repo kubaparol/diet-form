@@ -10,7 +10,7 @@ const StyledAddAnswerField = styled.div`
   }
   p:nth-child(2) {
     font-size: 1.3rem;
-    color: #61677c;
+    ${(props) => props.theme.fontColor}
   }
   div:nth-child(2) {
     display: flex;
@@ -25,10 +25,11 @@ const StyledAddAnswerField = styled.div`
     font-size: 16px;
     border-radius: 30px;
     padding: 16px;
-    background-color: #ebecf0;
-    text-shadow: 1px 1px 0 #fff;
-    color: #61677c;
-    box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+    background-color: ${(props) => props.theme.elementBcg};
+    text-shadow: 1px 1px 0 ${(props) => props.theme.shadowFirstColor};
+    color: ${(props) => props.theme.fontColor};
+    box-shadow: -5px -5px 20px ${(props) => props.theme.shadowFirstColor},
+      5px 5px 20px ${(props) => props.theme.shadowSecondColor};
     margin: 10px 0;
   }
   p {
