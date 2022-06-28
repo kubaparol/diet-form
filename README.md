@@ -1,53 +1,69 @@
-> ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
-> 
-> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.* 
+# Diet Form
+
+![screen app](./assets//image.png)
 
 &nbsp;
 
+## :mag: Overview
 
-# Neumorfizm
+:fire: Click to see live version: []()
 
-Neumorfizm to pewien trend w projektowaniu, który opiera się na odpowiednim wykorzystaniu cieni.
+**Diet Form** is a multi step form that allows the dietitian to create a personalized nutrition plan for the person filling out the form. 
 
-W tym projekcie Twoim zadaniem będzie utworzenie z pomocą Styled Components kilku komponentów zgodnych z tym trendem.
+User inreface was created with the neumorphism trend and styled using **Styled Components**.
 
-Formularz powinien być rozbudowany, lecz to od Ciebie zależy, jakie elementy w nim zawrzesz.
+The first step of the form is a greeting. The second, third, fourth, and fifth steps include text and one-choice fields, a dropdown list, and spaces to enter different answers. The form also has a progress bar.
 
-Zanim przejdziesz do implementowania, zapoznaj się z kilkoma artykułami na temat neumorfizmu:
-- [Neumorphism in user interfaces](https://uxdesign.cc/neumorphism-in-user-interfaces-b47cef3bf3a6) (jeśli wykorzystałeś darmowy limit, to wystarczy otworzyć tę stronę w trybie incognito)
-- [Neumorphism: why it’s all the hype in UI design](https://www.justinmind.com/blog/neumorphism-ui/)
-- [Neumorphism. The Next Big Thing In UI Design?](https://opengeekslab.com/blog/neumorphism-the-next-big-thing-ui-design/)
+## :bulb: Technologies
 
-## Komponenty
-
-Gdy zdecydujesz, z czego ma się składać Twój formularz, stwórz odpowiednie komponenty: pola tekstowe, listy rozwijane, checkboxy, buttony, paski postępu itd. Możesz skorzystać z podpowiedzi z punktu poniżej (Formularz).
-
-Po zapoznaniu się z podlinkowanymi artykułami wiesz już, na czym polega neumorfizm. Jeśli potrzebujesz dodatkowych wskazówek, to zachęcam Cię do skorzystania z [generatora kodu CSS](https://neumorphism.io/). Możesz również inspirować się [przykładami innych](https://bashooka.com/inspiration/neumorphism-ui-design-examples/).
-
-Jeśli masz własną koncepcję komponentów, to nie widzę przeszkód, abyś z niej skorzystał. Jeśli nie, to możesz się wzorować na poniższej grafice od [Emy Lascan](https://dribbble.com/shots/9527558-Freebie-Neumorphic-UX-UI-Elements).
-
-![](./example.png)
-
-## Formularz
-
-Kiedy będziesz mieć gotowe komponenty, zacznij budować swój formularz.
-
-Pamiętaj, aby w pełni prezentował on Twoje możliwości, np.:
-- składał się z trzech etapów (kroków, ekranów), po których można wygodnie się przemieszczać
-- posiadał rozwijaną listę implementowaną przez specjalne rozwiązanie, inne niż `select`
-- miał animowane elementy typu `chceckbox` czy `radio`
-- poziom wypełnienia pól prezentował przez pasek postępu
-- informował użytkownika od razu po wprowadzeniu błędnych danych.
-
-
-Jestem pewny, że ten projekt mocno zainteresuje Twojego przyszłego pracodawcę!
-
-
-PS Konfigurację środowiska zrób według własnego uznania.
-
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
+![Babel](https://img.shields.io/badge/Babel-F9DC3e?style=for-the-badge&logo=babel&logoColor=black)
 
 &nbsp;
 
-> ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
-> 
-> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.* 
+## :cd: Installation
+
+### You can run the project locally 
+
+- First you need to clone the project
+
+``` 
+git clone
+```
+
+- Then install all necessary packages
+
+```
+npm i
+```
+- Start developers mode
+
+```
+npm start
+```
+
+- App is ready to go:
+
+  -  site
+  ```
+  http://localhost:3000/
+  ```
+
+&nbsp;
+
+## :wave: Feel free to contact me
+
+You can find me here:
+
+- [LinkedIn](https://www.linkedin.com/in/jakub-parol/)
+- [GitHub](https://github.com/kubaparol)
+
+&nbsp;
+
+## :clap: Special thanks
+
+Special thanks to my [Mentor - devmentor.pl](https://devmentor.pl/) - for providing me with this task and for code review.
