@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "> ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***\r > \r > 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.*",
   "main": "index.js",
+  "homepage": "https://kubaparol.github.io/diet-form",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --mode development --open",
-    "build": "webpack --env production"
+    "build": "webpack --env production",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -18,7 +21,6 @@
   "bugs": {
     "url": "https://github.com/kubaparol/task-react-styling/issues"
   },
-  "homepage": "https://github.com/kubaparol/task-react-styling#readme",
   "devDependencies": {
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
@@ -35,6 +37,7 @@
     "@fortawesome/react-fontawesome": "^0.1.18",
     "css-loader": "^5.2.7",
     "framer-motion": "^6.3.16",
+    "gh-pages": "^4.0.0",
     "mini-css-extract-plugin": "^2.6.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
