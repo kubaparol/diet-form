@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const StyledFormPanel = styled.section`
   padding-top: 30px;
+  border: 1px solid red;
 
   ::-webkit-scrollbar {
     display: none;
